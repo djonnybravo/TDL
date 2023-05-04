@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/TDL/static/css/main.bbb55728.css",
+    "main.js": "/TDL/static/js/main.ece2720f.js",
+    "index.html": "/TDL/index.html",
+    "main.bbb55728.css.map": "/TDL/static/css/main.bbb55728.css.map",
+    "main.ece2720f.js.map": "/TDL/static/js/main.ece2720f.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.bbb55728.css",
+    "static/js/main.ece2720f.js"
+  ]
+}
