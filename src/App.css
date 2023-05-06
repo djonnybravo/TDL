@@ -19,3 +19,7 @@
 .active-filter {
   background-color: burlywood;
 }
+
+.is-done {
+  opacity: 0.5;
+}

@@ -65,7 +65,7 @@ const Todolist = (props: PropsType) => {
                     props.tasks.map(task => {
                             const removeTask = () => props.removeTask(task.id)
                             const onChangeStatus = (e: ChangeEvent<HTMLInputElement>) => props.changeTaskStatus(task.id, e.currentTarget.checked)
-                            return <li key={task.id}>
+                            return <li key={task.id} className={task.isDone ? "is-done" : ""}>
                                 <input type="checkbox" checked={task.isDone} onChange={onChangeStatus}/>
                                 <span>{task.title} </span>
                                 <button onClick={removeTask}>x
