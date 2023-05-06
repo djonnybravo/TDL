@@ -8,7 +8,7 @@ type PropsType = {
     removeTask: (id: string) => void
     addTask: (title: string) => void
     changeFilter: (value: FilterValuesType) => void
-    changeTaskStatus: (taskID:string, isDone:boolean) => void
+    changeTaskStatus: (taskID: string, isDone: boolean) => void
 }
 
 type TaskType = {
@@ -19,21 +19,26 @@ type TaskType = {
 const Todolist = (props: PropsType) => {
 
     const [newTaskTitle, setNewTaskTitle] = useState(' ')
-
+    const [error, setError] = useState(false)
 
     const onChangeInputHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setNewTaskTitle(e.currentTarget.value)
+        setError(false)
     }
     const onKeyPressInputHandler = (e: KeyboardEvent<HTMLInputElement>) => {
         if (e.charCode == 13) {
             props.addTask(newTaskTitle);
             setNewTaskTitle('')
+            setError(false)
         }
     }
     const addTask = () => {
         if (newTaskTitle.trim() !== "") {
             props.addTask(newTaskTitle);
             setNewTaskTitle('')
+            setError(false)
+        } else {
+            setError(true)
         }
     }
     const onAllFilterClick = () => props.changeFilter('All')
@@ -48,14 +53,17 @@ const Todolist = (props: PropsType) => {
                     value={newTaskTitle}
                     onChange={onChangeInputHandler}
                     onKeyPress={onKeyPressInputHandler}
+                    className={error ? "error" : ""}
                 />
                 <button onClick={addTask}>+</button>
+                {error && <div className="error-message">Field is required and cant be empty!</div>}
+
             </div>
             <ul>
                 {
                     props.tasks.map(task => {
                             const removeTask = () => props.removeTask(task.id)
-                            const onChangeStatus = (e:  ChangeEvent<HTMLInputElement>) => props.changeTaskStatus(task.id, e.currentTarget.checked)
+                            const onChangeStatus = (e: ChangeEvent<HTMLInputElement>) => props.changeTaskStatus(task.id, e.currentTarget.checked)
                             return <li key={task.id}>
                                 <input type="checkbox" checked={task.isDone} onChange={onChangeStatus}/>
                                 <span>{task.title} </span>
