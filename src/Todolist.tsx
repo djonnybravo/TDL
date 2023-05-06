@@ -5,6 +5,7 @@ import {FilterValuesType} from "./App";
 type PropsType = {
     title: string
     tasks: TaskType[]
+    filter: FilterValuesType
     removeTask: (id: string) => void
     addTask: (title: string) => void
     changeFilter: (value: FilterValuesType) => void
@@ -36,7 +37,7 @@ const Todolist = (props: PropsType) => {
         if (newTaskTitle.trim() !== "") {
             props.addTask(newTaskTitle);
             setNewTaskTitle('')
-            setError(false)
+
         } else {
             setError(true)
         }
@@ -74,9 +75,9 @@ const Todolist = (props: PropsType) => {
                     )}
             </ul>
             <div>
-                <button onClick={onAllFilterClick}>All</button>
-                <button onClick={onActiveFilterClick}>Active</button>
-                <button onClick={onCompletedFilterClick}>Completed</button>
+                <button className={props.filter === "All" ? "active-filter" : ""} onClick={onAllFilterClick}>All</button>
+                <button className={props.filter === "Active" ? "active-filter" : ""} onClick={onActiveFilterClick}>Active</button>
+                <button className={props.filter === "Completed" ? "active-filter" : ""} onClick={onCompletedFilterClick}>Completed</button>
             </div>
         </div>
     );
