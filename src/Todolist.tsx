@@ -31,8 +31,10 @@ const Todolist = (props: PropsType) => {
         }
     }
     const addTask = () => {
-        props.addTask(newTaskTitle);
-        setNewTaskTitle('')
+        if (newTaskTitle.trim() !== "") {
+            props.addTask(newTaskTitle);
+            setNewTaskTitle('')
+        }
     }
     const onAllFilterClick = () => props.changeFilter('All')
     const onActiveFilterClick = () => props.changeFilter('Active')
