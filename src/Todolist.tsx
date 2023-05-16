@@ -7,13 +7,13 @@ type PropsType = {
     title: string
     tasks: TaskType[]
     filter: FilterValuesType
-    removeTask: (id: string) => void
+    removeTask: (id: string, todolistID: string) => void
     addTask: (title: string) => void
     changeFilter: (value: FilterValuesType, todolistID: string) => void
     changeTaskStatus: (taskID: string, isDone: boolean) => void
 }
 
-type TaskType = {
+export type TaskType = {
     id: string
     title: string
     isDone: boolean
@@ -64,7 +64,7 @@ const Todolist = (props: PropsType) => {
             <ul>
                 {
                     props.tasks.map(task => {
-                            const removeTask = () => props.removeTask(task.id)
+                            const removeTask = () => props.removeTask(task.id, props.todolistID)
                             const onChangeStatus = (e: ChangeEvent<HTMLInputElement>) => props.changeTaskStatus(task.id, e.currentTarget.checked)
                             return <li key={task.id} className={task.isDone ? "is-done" : ""}>
                                 <input type="checkbox" checked={task.isDone} onChange={onChangeStatus}/>
