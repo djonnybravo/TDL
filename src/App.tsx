@@ -13,18 +13,28 @@ type TodolistsType = {
 
 function App() {
 
-
+    const todolistId1 = v1()
+    const todolistId2 = v1()
     const [todolists, setTodolists] = useState<Array<TodolistsType>>([
-        {id: v1(), title: "Что выучить:", filter: "All"},
-        {id: v1(), title: "Что купить:", filter: "Active"}
+        {id: todolistId1, title: "Что выучить:", filter: "All"},
+        {id: todolistId2, title: "Что купить:", filter: "Active"}
     ])
 
 
-    const [tasks, setTasks] = useState([
-        {id: v1(), title: 'HTML&CSS', isDone: true},
-        {id: v1(), title: 'JS', isDone: true},
-        {id: v1(), title: 'React', isDone: false}
-    ])
+    const [tasks, setTasks] = useState(
+        {
+            todolistId1: [
+                {id: v1(), title: 'HTML&CSS', isDone: true},
+                {id: v1(), title: 'JS', isDone: true},
+                {id: v1(), title: 'React', isDone: false}
+            ],
+            todolistId2: [
+                {id: v1(), title: 'Молоко', isDone: true},
+                {id: v1(), title: 'Сахар', isDone: true},
+                {id: v1(), title: 'Кофе', isDone: false}
+            ]
+        }
+    )
 
     const removeTask = (taskID: string) => {
         let removedTasks = tasks.filter(t => t.id !== taskID)
@@ -43,10 +53,10 @@ function App() {
         setTasks([...tasks])
     }
     const changeFilter = (value: FilterValuesType, todolistID: string) => {
-        let todolist = todolists.find(tl => tl.id === todolistID )
+        let todolist = todolists.find(tl => tl.id === todolistID)
         if (todolist) {
             todolist.filter = value
-            setTodolists([...todolists ])
+            setTodolists([...todolists])
         }
     }
 
