@@ -15,7 +15,6 @@ const EditableSpan = (props: EditableSpanPropsType) => {
         SetEditMode(false)
         props.onChange(title)
     }
-
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setTitle(e.currentTarget.value)
         setError(null)

@@ -85,7 +85,6 @@ function App() {
             setTodolists([...todolists])
         }
     }
-
     const changeTaskTitle = (taskId: string, NewTitle: string, todolistID: string) => {
         const tasks = tasksObj[todolistID]
         let task = tasks.find(t => t.id === taskId);
