@@ -1,6 +1,7 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
 import {FilterValuesType} from "../App";
 import AddItemForm from "./AddItemForm";
+import {v1} from "uuid";
 
 
 type PropsType = {
@@ -27,7 +28,7 @@ const Todolist = (props: PropsType) => {
     const onActiveFilterClick = () => props.changeFilter('Active', props.todolistID)
     const onCompletedFilterClick = () => props.changeFilter('Completed', props.todolistID)
     const removeTodolist = () => props.removeTodolist(props.todolistID)
-
+    const addTask = (title: string) => props.addTask(title, props.todolistID)
 
     return (
         <div>
@@ -36,7 +37,7 @@ const Todolist = (props: PropsType) => {
                 <button onClick={removeTodolist}>x</button>
             </h3>
 
-           <AddItemForm todolistID={props.todolistID} addTask={props.addTask}/>
+           <AddItemForm addItem={addTask}/>
             <ul>
                 {
                     props.tasks.map(task => {
