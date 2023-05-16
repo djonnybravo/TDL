@@ -96,6 +96,8 @@ function App() {
         }
     }
 
+    //before install MUI
+
     return (
         <div className="App">
             <AddItemForm addItem={addTodolist}/>
