@@ -20,8 +20,7 @@ function App() {
         {id: todolistId2, title: "Что купить:", filter: "Active"}
     ])
 
-
-    const [tasks, setTasks] = useState(
+    const [tasksObj, setTasks] = useState(
         {
             [todolistId1]: [
                 {id: v1(), title: 'HTML&CSS', isDone: true},
@@ -37,13 +36,19 @@ function App() {
     )
 
     const removeTask = (taskID: string, todolistID:string) => {
-        let removedTasks = tasks[todolistID].filter(t => t.id !== taskID)
-        tasks[todolistID] = removedTasks
-        setTasks({...tasks})
+
+        const tasks = tasksObj[todolistID]
+        let filteredTasks = tasks.filter(t => t.id !== id);
+        tasksObj[todolistID] = filteredTasks
+        setTasks({...tasksObj})
     }
-    const addTask = (title: string) => {
-        let newTask = {id: v1(), title: title, isDone: false}
-        setTasks([newTask, ...tasks])
+    const addTask = (title: string, todolistID:string) => {
+        let task = {id: v1(), title: title, isDone: false};
+        const tasks = tasksObj[todolistID]
+        let newTasks = [task, ...tasks];
+        tasksObj[todolistID] = newTasks
+        setTasks({...tasksObj});
+
     }
     const changeTaskStatus = (taskID: string, isDone: boolean) => {
         let newTask = tasks.find(t => t.id === taskID)
