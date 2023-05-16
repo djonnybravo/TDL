@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import './App.css';
 import Todolist from "./components/Todolist";
 import {v1} from "uuid";
+import AddItemForm from "./components/AddItemForm";
 
 
 
@@ -72,6 +73,7 @@ function App() {
 
     return (
         <div className="App">
+            <AddItemForm todolistID={v1()} addItem={() => {}}/>
             {
                 todolists.map((todolist) => {
 
