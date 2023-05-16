@@ -22,29 +22,7 @@ export type TaskType = {
 }
 const Todolist = (props: PropsType) => {
 
-    const [newTaskTitle, setNewTaskTitle] = useState(' ')
-    const [error, setError] = useState(false)
 
-    const onChangeInputHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        setNewTaskTitle(e.currentTarget.value)
-        setError(false)
-    }
-    const onKeyPressInputHandler = (e: KeyboardEvent<HTMLInputElement>) => {
-        if (e.charCode == 13) {
-            props.addTask(newTaskTitle, props.todolistID);
-            setNewTaskTitle('')
-            setError(false)
-        }
-    }
-    const addTask = () => {
-        if (newTaskTitle.trim() !== "") {
-            props.addTask(newTaskTitle, props.todolistID);
-            setNewTaskTitle('')
-
-        } else {
-            setError(true)
-        }
-    }
     const onAllFilterClick = () => props.changeFilter('All', props.todolistID)
     const onActiveFilterClick = () => props.changeFilter('Active', props.todolistID)
     const onCompletedFilterClick = () => props.changeFilter('Completed', props.todolistID)
