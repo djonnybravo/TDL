@@ -2,7 +2,7 @@ import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
 
 type AddItemFormPropsType = {
     todolistID: string
-    addItem: (title: string, todolistID: string) => void
+    addItem: (title: string) => void
 }
 
 const AddItemForm = (props: AddItemFormPropsType) => {
@@ -16,14 +16,14 @@ const AddItemForm = (props: AddItemFormPropsType) => {
     }
     const onKeyPressInputHandler = (e: KeyboardEvent<HTMLInputElement>) => {
         if (e.charCode == 13) {
-            props.addItem(newTaskTitle, props.todolistID);
+            props.addItem(newTaskTitle);
             setNewTaskTitle('')
             setError(false)
         }
     }
-    const addTask = () => {
+    const addItem = () => {
         if (newTaskTitle.trim() !== "") {
-            props.addItem(newTaskTitle, props.todolistID);
+            props.addItem(newTaskTitle);
             setNewTaskTitle('')
 
         } else {
@@ -39,7 +39,7 @@ const AddItemForm = (props: AddItemFormPropsType) => {
                 onKeyPress={onKeyPressInputHandler}
                 className={error ? "error" : ""}
             />
-            <button onClick={addTask}>+</button>
+            <button onClick={addItem}>+</button>
             {error && <div className="error-message">Field is required and cant be empty!</div>}
 
         </div>
