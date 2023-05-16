@@ -3,7 +3,7 @@ import './App.css';
 import Todolist from "./components/Todolist";
 import {v1} from "uuid";
 import AddItemForm from "./components/AddItemForm";
-
+import todolist from "./components/Todolist";
 
 
 export type FilterValuesType = 'All' | 'Completed' | 'Active'
@@ -69,11 +69,15 @@ function App() {
         delete tasksObj[todolistID]
         setTasks({...tasksObj})
     }
-
+    const addTodolist = (title: string) => {
+        let newTodolist: TodolistsType = {id: v1(), title: title, filter: "All"}
+        setTodolists([newTodolist, ...todolists])
+        setTasks({...tasksObj, [newTodolist.id]: []})
+    }
 
     return (
         <div className="App">
-            <AddItemForm addItem={() => {}}/>
+            <AddItemForm addItem={addTodolist}/>
             {
                 todolists.map((todolist) => {
 
