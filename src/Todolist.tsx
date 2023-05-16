@@ -11,6 +11,7 @@ type PropsType = {
     addTask: (title: string, todolistID: string) => void
     changeFilter: (value: FilterValuesType, todolistID: string) => void
     changeTaskStatus: (taskID: string, isDone: boolean, todolistID: string) => void
+    removeTodolist: (todolistID: string) => void
 }
 
 export type TaskType = {
@@ -46,10 +47,16 @@ const Todolist = (props: PropsType) => {
     const onAllFilterClick = () => props.changeFilter('All', props.todolistID)
     const onActiveFilterClick = () => props.changeFilter('Active', props.todolistID)
     const onCompletedFilterClick = () => props.changeFilter('Completed', props.todolistID)
+    const removeTodolist = () => props.removeTodolist(props.todolistID)
+
 
     return (
         <div>
-            <h3>{props.title}</h3>
+            <h3>
+                {props.title}
+                <button onClick={removeTodolist}>x</button>
+            </h3>
+
             <div>
                 <input
                     value={newTaskTitle}
@@ -76,9 +83,18 @@ const Todolist = (props: PropsType) => {
                     )}
             </ul>
             <div>
-                <button className={props.filter === "All" ? "active-filter" : ""} onClick={onAllFilterClick}>All</button>
-                <button className={props.filter === "Active" ? "active-filter" : ""} onClick={onActiveFilterClick}>Active</button>
-                <button className={props.filter === "Completed" ? "active-filter" : ""} onClick={onCompletedFilterClick}>Completed</button>
+                <button
+                    className={props.filter === "All" ? "active-filter" : ""}
+                    onClick={onAllFilterClick}>All
+                </button>
+                <button
+                    className={props.filter === "Active" ? "active-filter" : ""}
+                    onClick={onActiveFilterClick}>Active
+                </button>
+                <button
+                    className={props.filter === "Completed" ? "active-filter" : ""}
+                    onClick={onCompletedFilterClick}>Completed
+                </button>
             </div>
         </div>
     );
