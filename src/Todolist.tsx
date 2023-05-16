@@ -8,9 +8,9 @@ type PropsType = {
     tasks: TaskType[]
     filter: FilterValuesType
     removeTask: (id: string, todolistID: string) => void
-    addTask: (title: string) => void
+    addTask: (title: string, todolistID: string) => void
     changeFilter: (value: FilterValuesType, todolistID: string) => void
-    changeTaskStatus: (taskID: string, isDone: boolean) => void
+    changeTaskStatus: (taskID: string, isDone: boolean, todolistID: string) => void
 }
 
 export type TaskType = {
@@ -29,14 +29,14 @@ const Todolist = (props: PropsType) => {
     }
     const onKeyPressInputHandler = (e: KeyboardEvent<HTMLInputElement>) => {
         if (e.charCode == 13) {
-            props.addTask(newTaskTitle);
+            props.addTask(newTaskTitle, props.todolistID);
             setNewTaskTitle('')
             setError(false)
         }
     }
     const addTask = () => {
         if (newTaskTitle.trim() !== "") {
-            props.addTask(newTaskTitle);
+            props.addTask(newTaskTitle, props.todolistID);
             setNewTaskTitle('')
 
         } else {
@@ -65,7 +65,7 @@ const Todolist = (props: PropsType) => {
                 {
                     props.tasks.map(task => {
                             const removeTask = () => props.removeTask(task.id, props.todolistID)
-                            const onChangeStatus = (e: ChangeEvent<HTMLInputElement>) => props.changeTaskStatus(task.id, e.currentTarget.checked)
+                            const onChangeStatus = (e: ChangeEvent<HTMLInputElement>) => props.changeTaskStatus(task.id, e.currentTarget.checked, props.todolistID)
                             return <li key={task.id} className={task.isDone ? "is-done" : ""}>
                                 <input type="checkbox" checked={task.isDone} onChange={onChangeStatus}/>
                                 <span>{task.title} </span>
