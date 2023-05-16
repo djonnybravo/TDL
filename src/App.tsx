@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import './App.css';
 import Todolist from "./Todolist";
 import {v1} from "uuid";
-import todolist from "./Todolist";
+
 
 
 export type FilterValuesType = 'All' | 'Completed' | 'Active'
@@ -66,7 +66,7 @@ function App() {
         let filteredTodolist = todolists.filter(tl => tl.id !== todolistID)
         setTodolists([...filteredTodolist])
         delete tasksObj[todolistID]
-        setTasks(tasksObj)
+        setTasks({...tasksObj})
     }
 
 
