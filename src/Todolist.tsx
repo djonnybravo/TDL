@@ -3,12 +3,13 @@ import {FilterValuesType} from "./App";
 
 
 type PropsType = {
+    todolistID: string
     title: string
     tasks: TaskType[]
     filter: FilterValuesType
     removeTask: (id: string) => void
     addTask: (title: string) => void
-    changeFilter: (value: FilterValuesType) => void
+    changeFilter: (value: FilterValuesType, todolistID: string) => void
     changeTaskStatus: (taskID: string, isDone: boolean) => void
 }
 
@@ -42,9 +43,9 @@ const Todolist = (props: PropsType) => {
             setError(true)
         }
     }
-    const onAllFilterClick = () => props.changeFilter('All')
-    const onActiveFilterClick = () => props.changeFilter('Active')
-    const onCompletedFilterClick = () => props.changeFilter('Completed')
+    const onAllFilterClick = () => props.changeFilter('All', props.todolistID)
+    const onActiveFilterClick = () => props.changeFilter('Active', props.todolistID)
+    const onCompletedFilterClick = () => props.changeFilter('Completed', props.todolistID)
 
     return (
         <div>
