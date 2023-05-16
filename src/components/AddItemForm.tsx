@@ -46,7 +46,7 @@ const AddItemForm = (props: AddItemFormPropsType) => {
 
             />
             <IconButton onClick={addItem}>
-                <ControlPoint color={"primary"}/>
+                <ControlPoint color={ error ? "error" : "primary"}/>
             </IconButton>
 
 

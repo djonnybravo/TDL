@@ -4,6 +4,7 @@ import Todolist, {TaskType} from "./components/Todolist";
 import {v1} from "uuid";
 import AddItemForm from "./components/AddItemForm";
 import todolist from "./components/Todolist";
+import {Box, Button, Fab, Popover, SpeedDial, SpeedDialAction, SpeedDialIcon} from "@mui/material";
 
 
 export type FilterValuesType = 'All' | 'Completed' | 'Active'
@@ -99,7 +100,21 @@ function App() {
 
     return (
         <div className="App">
-            <AddItemForm addItem={addTodolist}/>
+
+
+            <div style={
+                {
+                    padding: "20px",
+                    border: "2px solid blue",
+                    display: "flex",
+                    alignItems: "center",
+                    flexDirection: "column"
+                }}>
+               <span style={{marginBottom: "90px"}}>Создай новый тудулист</span>
+                <AddItemForm addItem={addTodolist}/>
+            </div>
+
+
             {
                 todolists.map((todolist) => {
 
