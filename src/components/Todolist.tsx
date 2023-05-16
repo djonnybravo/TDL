@@ -33,7 +33,7 @@ const Todolist = (props: PropsType) => {
     return (
         <div>
             <h3>
-                {props.title}
+                {props.title}---
                 <button onClick={removeTodolist}>x</button>
             </h3>
 
@@ -45,7 +45,7 @@ const Todolist = (props: PropsType) => {
                             const onChangeStatus = (e: ChangeEvent<HTMLInputElement>) => props.changeTaskStatus(task.id, e.currentTarget.checked, props.todolistID)
                             return <li key={task.id} className={task.isDone ? "is-done" : ""}>
                                 <input type="checkbox" checked={task.isDone} onChange={onChangeStatus}/>
-                                <span>{task.title} </span>
+                                <EditableSpan title={task.title}/>
                                 <button onClick={removeTask}>x
                                 </button>
                             </li>
@@ -70,3 +70,9 @@ const Todolist = (props: PropsType) => {
     );
 };
 export default Todolist;
+
+
+type EditableSpanPropsType = {title:string}
+const EditableSpan = (props: EditableSpanPropsType) => {
+        return <span>{props.title}</span>
+}
