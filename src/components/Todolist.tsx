@@ -1,5 +1,6 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
 import {FilterValuesType} from "../App";
+import AddItemForm from "./AddItemForm";
 
 
 type PropsType = {
@@ -57,17 +58,7 @@ const Todolist = (props: PropsType) => {
                 <button onClick={removeTodolist}>x</button>
             </h3>
 
-            <div>
-                <input
-                    value={newTaskTitle}
-                    onChange={onChangeInputHandler}
-                    onKeyPress={onKeyPressInputHandler}
-                    className={error ? "error" : ""}
-                />
-                <button onClick={addTask}>+</button>
-                {error && <div className="error-message">Field is required and cant be empty!</div>}
-
-            </div>
+           <AddItemForm todolistID={props.todolistID} addTask={props.addTask}/>
             <ul>
                 {
                     props.tasks.map(task => {
