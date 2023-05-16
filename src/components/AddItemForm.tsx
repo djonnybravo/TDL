@@ -1,4 +1,6 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
+import {Button, IconButton, TextField} from "@mui/material";
+import {ControlPoint} from "@mui/icons-material";
 
 type AddItemFormPropsType = {
     addItem: (title: string) => void
@@ -32,14 +34,30 @@ const AddItemForm = (props: AddItemFormPropsType) => {
 
     return (
         <div>
-            <input
+            <TextField
+                id="standard-basic"
+                label="Введите название"
+                variant="standard"
+                error={error}
+                helperText="Поле обязательно и не может быть пустым"
                 value={newTaskTitle}
                 onChange={onChangeInputHandler}
                 onKeyPress={onKeyPressInputHandler}
-                className={error ? "error" : ""}
+
             />
-            <button onClick={addItem}>+</button>
-            {error && <div className="error-message">Field is required and cant be empty!</div>}
+            <IconButton onClick={addItem}>
+                <ControlPoint color={"primary"}/>
+            </IconButton>
+
+
+            {/*<input*/}
+            {/*    value={newTaskTitle}*/}
+            {/*    onChange={onChangeInputHandler}*/}
+            {/*    onKeyPress={onKeyPressInputHandler}*/}
+            {/*    className={error ? "error" : ""}*/}
+            {/*/>*/}
+            {/*<Button onClick={addItem}>+</Button>*/}
+            {/*{error && <div className="error-message">Field is required and cant be empty!</div>}*/}
 
         </div>
     );
