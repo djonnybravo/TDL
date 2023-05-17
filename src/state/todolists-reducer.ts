@@ -18,22 +18,22 @@ export const todolistsReducer = (state: Array<TodolistsType>, action: ActionType
 
         case 'CHANGE-TODOLIST-TITLE':{
             let changedTodolist = state.find(tl => tl.id === action.id)
-            let newState = [...state]
+
             if (changedTodolist) {
                 changedTodolist.title = action.title
-                newState = [...state, changedTodolist]
+
             }
-            return newState
+            return [...state]
         }
 
         case 'CHANGE-TODOLIST-FILTER': {
             let changedTodolist = state.find(tl => tl.id === action.id)
-            let newState = [...state]
+
             if (changedTodolist) {
                 changedTodolist.filter = action.filter
-                newState = [...state, changedTodolist]
+
             }
-            return newState
+            return [...state]
         }
         default:
             throw new Error('I don\'t understand this type')
