@@ -27,7 +27,7 @@ export const todolistsReducer = (state: Array<TodolistsType>, action: ActionType
             return newState
         }
 
-        case 'CHANGE-TODOLIST-FILTER':
+        case 'CHANGE-TODOLIST-FILTER': {
             let changedTodolist = state.find(tl => tl.id === action.id)
             let newState = [...state]
             if (changedTodolist) {
@@ -35,7 +35,7 @@ export const todolistsReducer = (state: Array<TodolistsType>, action: ActionType
                 newState = [...state, changedTodolist]
             }
             return newState
-
+        }
         default:
             throw new Error('I don\'t understand this type')
     }
