@@ -3,8 +3,7 @@ import './App.css';
 import Todolist, {TaskType} from "./components/Todolist";
 import {v1} from "uuid";
 import AddItemForm from "./components/AddItemForm";
-import todolist from "./components/Todolist";
-import {Box, Button, Fab, Popover, SpeedDial, SpeedDialAction, SpeedDialIcon} from "@mui/material";
+
 
 
 export type FilterValuesType = 'All' | 'Completed' | 'Active'
@@ -96,11 +95,10 @@ function App() {
         }
     }
 
-    //before install MUI
+
 
     return (
         <div className="App">
-
 
             <div style={
                 {
@@ -113,7 +111,6 @@ function App() {
                <span style={{marginBottom: "90px"}}>Создай новый тудулист</span>
                 <AddItemForm addItem={addTodolist}/>
             </div>
-
 
             {
                 todolists.map((todolist) => {
@@ -143,7 +140,6 @@ function App() {
                     />
                 })
             }
-
         </div>
     );
 }

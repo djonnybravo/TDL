@@ -43,7 +43,6 @@ const Todolist = (props: PropsType) => {
                     <DeleteOutline/>
                 </IconButton>
 
-                {/*<button onClick={removeTodolist}>x</button>*/}
             </h3>
 
             <AddItemForm addItem={addTask}/>
