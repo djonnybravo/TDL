@@ -1,7 +1,5 @@
 import {
     AddTodolistAC, ChangeFilterTodolistAC, ChangeTitleTodolistAC,
-    ChangeTodolistFilterActionType,
-    ChangeTodolistTitleActionType,
     RemoveTodolistAC,
     todolistsReducer
 } from './todolists-reducer'
