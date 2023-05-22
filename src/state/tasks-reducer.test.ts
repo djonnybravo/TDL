@@ -118,7 +118,7 @@ test('new array should be added when new todolist is added', () => {
         ]
     }
 
-    const action = AddTodolistAC('new todolist', v1())
+    const action = AddTodolistAC('new todolist')
 
     const endState = tasksReducer(startState, action)
 
