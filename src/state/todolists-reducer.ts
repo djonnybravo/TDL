@@ -1,6 +1,5 @@
 import {FilterValuesType, TodolistsType} from "../App";
 import {v1} from "uuid";
-import {AppRootStateType} from "./store";
 
 
 type ActionsType = RemoveTodolistActionType | AddTodolistActionType | ChangeTodolistFilterActionType | ChangeTodolistTitleActionType
