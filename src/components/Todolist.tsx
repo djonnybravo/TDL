@@ -31,7 +31,7 @@ const Todolist = memo( (props: PropsType) => {
     const onActiveFilterClick = () => props.changeFilter('Active', props.todolistID)
     const onCompletedFilterClick = () => props.changeFilter('Completed', props.todolistID)
     const removeTodolist = () => props.removeTodolist(props.todolistID)
-    const addTask = useCallback((title: string) => props.addTask(title, props.todolistID), [])
+    const addTask = useCallback((title: string) => props.addTask(title, props.todolistID), [props.addTask, props.todolistID])
     const onChangeTodolistTitle = (title: string) => props.changeTodolistTitle(title, props.todolistID)
 
     let tasksForTodolist: Array<TaskType> = props.tasks
