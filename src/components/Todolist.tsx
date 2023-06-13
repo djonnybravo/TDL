@@ -1,4 +1,4 @@
-import React, {ChangeEvent} from 'react';
+import React, {ChangeEvent, useCallback} from 'react';
 import {FilterValuesType} from "../App";
 import AddItemForm from "./AddItemForm";
 import EditableSpan from './EditableSpan';
@@ -31,7 +31,7 @@ const Todolist = (props: PropsType) => {
     const onActiveFilterClick = () => props.changeFilter('Active', props.todolistID)
     const onCompletedFilterClick = () => props.changeFilter('Completed', props.todolistID)
     const removeTodolist = () => props.removeTodolist(props.todolistID)
-    const addTask = (title: string) => props.addTask(title, props.todolistID)
+    const addTask = useCallback((title: string) => props.addTask(title, props.todolistID), [])
     const onChangeTodolistTitle = (title: string) => props.changeTodolistTitle(title, props.todolistID)
 
 
