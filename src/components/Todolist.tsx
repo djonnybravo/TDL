@@ -26,7 +26,7 @@ export type TaskType = {
     isDone: boolean
 }
 const Todolist = (props: PropsType) => {
-
+    console.log("todolist render")
     const onAllFilterClick = () => props.changeFilter('All', props.todolistID)
     const onActiveFilterClick = () => props.changeFilter('Active', props.todolistID)
     const onCompletedFilterClick = () => props.changeFilter('Completed', props.todolistID)
