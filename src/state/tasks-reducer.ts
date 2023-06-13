@@ -31,18 +31,7 @@ export type ChangeTaskTitleActionType = {
     todolistID: string
 }
 
-const initState: TasksStateType = {
-    [todolistId1]: [
-        {id: v1(), title: 'HTML&CSS', isDone: true},
-        {id: v1(), title: 'JS', isDone: false},
-        {id: v1(), title: 'React', isDone: false}
-    ],
-    [todolistId2]: [
-        {id: v1(), title: 'Молоко', isDone: false},
-        {id: v1(), title: 'Сахар', isDone: true},
-        {id: v1(), title: 'Кофе', isDone: false}
-    ]
-}
+const initState: TasksStateType = {}
 
 export const tasksReducer = (state: TasksStateType = initState, action: ActionTypes) => {
     switch (action.type){
