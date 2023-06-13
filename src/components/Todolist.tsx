@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useCallback} from 'react';
+import React, {ChangeEvent, memo, useCallback} from 'react';
 import {FilterValuesType} from "../App";
 import AddItemForm from "./AddItemForm";
 import EditableSpan from './EditableSpan';
@@ -25,7 +25,7 @@ export type TaskType = {
     title: string
     isDone: boolean
 }
-const Todolist = (props: PropsType) => {
+const Todolist = memo( (props: PropsType) => {
     console.log("todolist render")
     const onAllFilterClick = () => props.changeFilter('All', props.todolistID)
     const onActiveFilterClick = () => props.changeFilter('Active', props.todolistID)
@@ -33,6 +33,18 @@ const Todolist = (props: PropsType) => {
     const removeTodolist = () => props.removeTodolist(props.todolistID)
     const addTask = useCallback((title: string) => props.addTask(title, props.todolistID), [])
     const onChangeTodolistTitle = (title: string) => props.changeTodolistTitle(title, props.todolistID)
+
+    let tasksForTodolist: Array<TaskType> = props.tasks
+
+
+    if (props.filter === "Completed") {
+        tasksForTodolist = props.tasks.filter(t => t.isDone)
+    }
+    if (props.filter === "Active") {
+        tasksForTodolist = props.tasks.filter(t => !t.isDone)
+    }
+
+
 
 
     return (
@@ -48,7 +60,7 @@ const Todolist = (props: PropsType) => {
             <AddItemForm addItem={addTask}/>
             <ul>
                 {
-                    props.tasks.map(task => {
+                    tasksForTodolist.map(task => {
 
                             const removeTask = () => props.removeTask(task.id, props.todolistID)
                             const onChangeStatus = (e: ChangeEvent<HTMLInputElement>) => props.changeTaskStatus(task.id, e.currentTarget.checked, props.todolistID)
@@ -86,6 +98,6 @@ const Todolist = (props: PropsType) => {
             </div>
         </div>
     );
-};
+});
 export default Todolist;
 

@@ -36,33 +36,31 @@ function AppWithRedux() {
 
 
 
-    const removeTask = (taskID: string, todolistID: string) =>  dispatch(removeTaskAC(taskID, todolistID))
+    const removeTask = useCallback((taskID: string, todolistID: string) =>  dispatch(removeTaskAC(taskID, todolistID)), [])
 
-    const addTask = (title: string, todolistID: string) =>  dispatch(addTaskAC(title, todolistID))
+    const addTask = useCallback((title: string, todolistID: string) =>  dispatch(addTaskAC(title, todolistID)), [])
 
-
-    const changeTaskStatus = (taskID: string, isDone: boolean, todolistID: string) => {
+    const changeTaskStatus = useCallback((taskID: string, isDone: boolean, todolistID: string) => {
         dispatch(changeTaskStatusAC(taskID,isDone,todolistID))
-    }
-    const changeTaskTitle = (taskId: string, NewTitle: string, todolistID: string) => {
+    }, [])
+    const changeTaskTitle = useCallback((taskId: string, NewTitle: string, todolistID: string) => {
         dispatch(changeTaskTitleAC(taskId, NewTitle, todolistID))
-    }
+    }, [])
 
     const addTodolist = useCallback((title: string) => {
 
         const action = AddTodolistAC(title)
         dispatch(action)
     }, [])
-
-    const removeTodolist = (todolistID: string) => {
+    const removeTodolist = useCallback( (todolistID: string) => {
         dispatch(RemoveTodolistAC(todolistID))
-    }
-    const changeTodolistTitle = (newTitle: string, todolistID: string) => {
+    }, [])
+    const changeTodolistTitle = useCallback((newTitle: string, todolistID: string) => {
         dispatch(ChangeTitleTodolistAC(newTitle, todolistID))
-    }
-    const changeFilter = (value: FilterValuesType, todolistID: string) => {
+    }, [])
+    const changeFilter = useCallback((value: FilterValuesType, todolistID: string) => {
         dispatch(ChangeFilterTodolistAC(todolistID, value))
-    }
+    }, [])
 
     return (
         <div className="App">
@@ -83,12 +81,7 @@ function AppWithRedux() {
                 todolists.map((todolist) => {
 
                     let taskForTodolist = tasksObj[todolist.id]
-                    if (todolist.filter === "Completed") {
-                        taskForTodolist = taskForTodolist.filter(t => t.isDone)
-                    }
-                    if (todolist.filter === "Active") {
-                        taskForTodolist = tasksObj[todolist.id].filter(t => !t.isDone)
-                    }
+
 
 
                     return <Todolist
