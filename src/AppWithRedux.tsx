@@ -26,7 +26,7 @@ export type TasksStateType = {
 }
 
 function AppWithRedux() {
-    console.log("app render")
+    console.log("app rendering")
 
 
     const dispatch = useDispatch()
