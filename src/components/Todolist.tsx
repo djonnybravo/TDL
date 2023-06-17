@@ -2,7 +2,7 @@ import React, {ChangeEvent, memo, useCallback} from 'react';
 import {FilterValuesType} from "../App";
 import AddItemForm from "./AddItemForm";
 import EditableSpan from './EditableSpan';
-import {Button, ButtonGroup, Checkbox, IconButton} from "@mui/material";
+import {Button, ButtonGroup, Checkbox, IconButton, Paper} from "@mui/material";
 import {Delete, DeleteOutline} from "@mui/icons-material";
 import Task from "./Task";
 
@@ -47,7 +47,7 @@ const Todolist = memo((props: PropsType) => {
 
 
     return (
-        <div>
+        <Paper elevation={8} style={{padding: '20px'}}>
             <h3>
                 <EditableSpan title={props.title} onChange={onChangeTodolistTitle}/>
                 <IconButton onClick={removeTodolist}>
@@ -86,7 +86,7 @@ const Todolist = memo((props: PropsType) => {
                 </Button>
 
             </div>
-        </div>
+        </Paper>
     );
 });
 export default Todolist;
