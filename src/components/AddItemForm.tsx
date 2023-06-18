@@ -2,7 +2,7 @@ import React, {ChangeEvent, KeyboardEvent, memo, useState} from 'react';
 import {Button, IconButton, TextField} from "@mui/material";
 import {ControlPoint} from "@mui/icons-material";
 
-type AddItemFormPropsType = {
+export type AddItemFormPropsType = {
     addItem: (title: string) => void
 }
 
