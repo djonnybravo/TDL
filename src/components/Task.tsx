@@ -4,7 +4,7 @@ import EditableSpan from "./EditableSpan";
 import {DeleteOutline} from "@mui/icons-material";
 import {TaskType} from "./Todolist";
 
-type TaskPropsType = {
+export type TaskPropsType = {
     removeTask: (id: string, todolistID: string) => void
     changeTaskStatus: (taskID: string, isDone: boolean, todolistID: string) => void
     changeTaskTitle: (id: string, title: string, todolistID: string) => void
