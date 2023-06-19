@@ -12,7 +12,6 @@ const meta: Meta<typeof Button> = {
   argTypes: {
     backgroundColor: { control: 'color' },
   },
-
 };
 
 export default meta;
