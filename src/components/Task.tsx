@@ -19,14 +19,14 @@ const Task = memo((props: TaskPropsType) => {
     const onChangeTaskTitle = useCallback((title: string) => props.changeTaskTitle(props.task.id, title, props.todolistID), [props.task.id, props.todolistID])
 
     return (
-        <li key={props.task.id} className={props.task.isDone ? "is-done" : ""}>
+        <div key={props.task.id} className={props.task.isDone ? "is-done" : ""}>
         <Checkbox checked={props.task.isDone} onChange={onChangeStatus}
                   color={props.task.isDone ? "success" : "info"}/>
         <EditableSpan title={props.task.title} onChange={onChangeTaskTitle}/>
         <IconButton onClick={removeTask}>
             <DeleteOutline fontSize="small" color={props.task.isDone ? "success" : "primary"}/>
         </IconButton>
-    </li>
+    </div>
     )
 });
 

@@ -1,11 +1,13 @@
 .App {
-  padding: 30px;
   display: flex;
+  flex-direction: column;
 }
 
-.App > div {
-  margin-right: 50px;
+.app box {
+  margin: 0;
+
 }
+
 
 
 .error {

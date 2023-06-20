@@ -57,7 +57,7 @@ const Todolist = memo((props: PropsType) => {
             </h3>
 
             <AddItemForm addItem={addTask}/>
-            <ul>
+            <div>
                 {
                     tasksForTodolist.map(task =>
 
@@ -66,7 +66,7 @@ const Todolist = memo((props: PropsType) => {
                               key={task.id}/>
                     )}
 
-            </ul>
+            </div>
             <div>
                 <Button
                     onClick={onAllFilterClick}

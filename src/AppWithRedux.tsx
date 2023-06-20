@@ -11,7 +11,8 @@ import {
 import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC} from "./state/tasks-reducer";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "./state/store";
-
+import {AppBar, Box, Button, Container, Grid, IconButton, Paper, Toolbar, Typography} from "@mui/material";
+import MenuIcon from '@mui/icons-material/Menu';
 
 
 export type FilterValuesType = 'All' | 'Completed' | 'Active'
@@ -34,14 +35,12 @@ function AppWithRedux() {
     const tasksObj = useSelector<AppRootStateType, TasksStateType>(state => state.tasks)
 
 
+    const removeTask = useCallback((taskID: string, todolistID: string) => dispatch(removeTaskAC(taskID, todolistID)), [dispatch])
 
-
-    const removeTask = useCallback((taskID: string, todolistID: string) =>  dispatch(removeTaskAC(taskID, todolistID)), [dispatch])
-
-    const addTask = useCallback((title: string, todolistID: string) =>  dispatch(addTaskAC(title, todolistID)), [dispatch])
+    const addTask = useCallback((title: string, todolistID: string) => dispatch(addTaskAC(title, todolistID)), [dispatch])
 
     const changeTaskStatus = useCallback((taskID: string, isDone: boolean, todolistID: string) => {
-        dispatch(changeTaskStatusAC(taskID,isDone,todolistID))
+        dispatch(changeTaskStatusAC(taskID, isDone, todolistID))
     }, [dispatch])
     const changeTaskTitle = useCallback((taskId: string, NewTitle: string, todolistID: string) => {
         dispatch(changeTaskTitleAC(taskId, NewTitle, todolistID))
@@ -52,7 +51,7 @@ function AppWithRedux() {
         const action = AddTodolistAC(title)
         dispatch(action)
     }, [dispatch])
-    const removeTodolist = useCallback( (todolistID: string) => {
+    const removeTodolist = useCallback((todolistID: string) => {
         dispatch(RemoveTodolistAC(todolistID))
     }, [dispatch])
     const changeTodolistTitle = useCallback((newTitle: string, todolistID: string) => {
@@ -62,46 +61,66 @@ function AppWithRedux() {
         dispatch(ChangeFilterTodolistAC(todolistID, value))
     }, [dispatch])
 
+
     return (
         <div className="App">
+            <Box>
+                <AppBar position="static">
+                    <Toolbar>
+                        <IconButton
+                            size="large"
+                            edge="start"
+                            color="inherit"
+                            aria-label="menu"
+                            sx={{mr: 2}}
+                        >
+                            <MenuIcon/>
+                        </IconButton>
+                        <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
+                            News
+                        </Typography>
+                        <Button color="inherit">Login</Button>
+                    </Toolbar>
+                </AppBar>
+            </Box>
 
-            <div style={
-                {
-                    padding: "20px",
-                    border: "2px solid blue",
-                    display: "flex",
-                    alignItems: "center",
-                    flexDirection: "column"
-                }}>
-               <span style={{marginBottom: "90px"}}>Создай новый тудулист</span>
-                <AddItemForm addItem={addTodolist}/>
-            </div>
+            <Grid container style={{padding: "20px"}} spacing={4}>
+                <Grid item >
+                    <Paper style={{padding: "20px", margin: "0"}} elevation={24}   >
+                        <span style={{marginBottom: "90px"}}>Создай новый тудулист</span>
+                        <AddItemForm addItem={addTodolist}/>
+                    </Paper>
+                </Grid>
+            </Grid>
 
-            {
-                todolists.map((todolist) => {
+            <Container >
+                <Grid container spacing={4}>
+                    {
+                        todolists.map(tl => {
+                            return <Grid item key={tl.id}>
 
-                    let taskForTodolist = tasksObj[todolist.id]
+                                <Todolist
+                                    todolistID={tl.id}
+                                    title={tl.title}
+                                    tasks={tasksObj[tl.id]}
+                                    removeTask={removeTask}
+                                    changeFilter={changeFilter}
+                                    addTask={addTask}
+                                    changeTaskStatus={changeTaskStatus}
+                                    filter={tl.filter}
+                                    removeTodolist={removeTodolist}
+                                    changeTaskTitle={changeTaskTitle}
+                                    changeTodolistTitle={changeTodolistTitle}
+                                />
 
-
-
-                    return <Todolist
-                        key={todolist.id}
-                        todolistID={todolist.id}
-                        title={todolist.title}
-                        tasks={taskForTodolist}
-                        removeTask={removeTask}
-                        addTask={addTask}
-                        changeFilter={changeFilter}
-                        changeTaskStatus={changeTaskStatus}
-                        filter={todolist.filter}
-                        removeTodolist={removeTodolist}
-                        changeTodolistTitle={changeTodolistTitle}
-                        changeTaskTitle={changeTaskTitle}
-                    />
-                })
-            }
+                            </Grid>
+                        })
+                    }
+                </Grid>
+            </Container>
         </div>
     );
+    ;
 }
 
 export default AppWithRedux;
