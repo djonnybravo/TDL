@@ -9,10 +9,10 @@ import Task from "./Task";
 
 type PropsType = {
     todolistID: string
-    title: string
     tasks: TaskType[]
     filter: FilterValuesType
     addTask: (title: string, todolistID: string) => void
+    title: string
     changeFilter: (value: FilterValuesType, todolistID: string) => void
     changeTodolistTitle: (title: string, todolistID: string) => void
     removeTodolist: (todolistID: string) => void
