@@ -39,7 +39,11 @@ type DeleteTodolistResponseType = {
     fieldsErrors: Array<string>
     data: {}
 }
-
+type ResponseType<D = {}> = {
+    resultCode: number
+    messages: string[]
+    data: D
+}
 type TaskType = {
     description: string
     title: string
@@ -58,7 +62,20 @@ type GetTaskResponseType = {
     totalCount: number
     items: TaskType[]
 }
-
+type CreateTaskResponseType = {
+    resultCode: number
+    messages: string[],
+    data: {
+        item: TaskType
+    }
+}
+type ChangeTaskTitleResponseType = {
+    resultCode: number
+    messages: string[],
+    data: {
+        item: TaskType
+    }
+}
 
 export const todolistsApi = {
     getTodolist() {
@@ -78,15 +95,15 @@ export const todolistsApi = {
 
     },
     createTask(todolistID:string, taskTitle: string) {
-        return instance.post(`todo-lists/${todolistID}/tasks`,{title: taskTitle})
+        return instance.post<CreateTaskResponseType>(`todo-lists/${todolistID}/tasks`,{title: taskTitle})
 
     },
     changeTaskTitle(todolistID:string, taskID:string, taskTitle: string) {
-        return instance.put(`todo-lists/${todolistID}/tasks/${taskID}`,{title: taskTitle})
+        return instance.put<ChangeTaskTitleResponseType>(`todo-lists/${todolistID}/tasks/${taskID}`,{title: taskTitle})
 
     },
     deleteTask(todolistID:string, taskID: string) {
-        return instance.delete(`todo-lists/${todolistID}/tasks/${taskID}`)
+        return instance.delete<ResponseType>(`todo-lists/${todolistID}/tasks/${taskID}`)
 
     },
 
