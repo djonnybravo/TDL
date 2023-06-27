@@ -1,5 +1,5 @@
 import axios from "axios";
-import {DeleteTodolist} from "../stories/todolists-api.stories";
+
 
 const settings = {
     withCredentials: true,
@@ -8,7 +8,7 @@ const settings = {
     }
 }
 
-const todolistID = ""
+
 
 
 export const todolistsApi = {
@@ -23,5 +23,22 @@ export const todolistsApi = {
     },
     updateTodolistTitle(todolistID: string, newTitle: string) {
         return axios.put("https://social-network.samuraijs.com/api/1.1/todo-lists/" + todolistID, {title: newTitle}, settings)
-    }
+    },
+    getTasks(todolistID:string) {
+        return axios.get(`https://social-network.samuraijs.com/api/1.1/todo-lists/${todolistID}/tasks`, settings)
+
+    },
+    createTask(todolistID:string, taskTitle: string) {
+        return axios.post(`https://social-network.samuraijs.com/api/1.1/todo-lists/${todolistID}/tasks`,{title: taskTitle}, settings)
+
+    },
+    changeTaskTitle(todolistID:string, taskID:string, taskTitle: string) {
+        return axios.put(`https://social-network.samuraijs.com/api/1.1/todo-lists/${todolistID}/tasks/${taskID}`,{title: taskTitle}, settings)
+
+    },
+    deleteTask(todolistID:string, taskID: string) {
+        return axios.delete(`https://social-network.samuraijs.com/api/1.1/todo-lists/${todolistID}/tasks/${taskID}`, settings)
+
+    },
+
 }
