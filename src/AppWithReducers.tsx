@@ -1,6 +1,6 @@
-import React, {useReducer, useState} from 'react';
+ import React, {useReducer, useState} from 'react';
 // import './App.css';
-// import Todolist, {TaskType} from "./components/Todolist";
+// import Todolist from "./components/Todolist";
 // import {v1} from "uuid";
 // import AddItemForm from "./components/AddItemForm";
 // import {
@@ -11,15 +11,10 @@ import React, {useReducer, useState} from 'react';
 //     todolistsReducer
 // } from "./state/todolists-reducer";
 // import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC, tasksReducer} from "./state/tasks-reducer";
+// import {TaskPriorities, TaskStatuses, TaskType} from "./api/todolists-api";
 //
 //
 //
-// export type FilterValuesType = 'All' | 'Completed' | 'Active'
-// export type TodolistsType = {
-//     id: string;
-//     title: string
-//     filter: FilterValuesType
-// }
 //
 // export type TasksStateType = {
 //     [key: string]: TaskType[]
@@ -31,19 +26,66 @@ import React, {useReducer, useState} from 'react';
 //     const todolistId2 = v1()
 //
 //     const [todolists, dispatchToTodolist] = useReducer(todolistsReducer, [
-//         {id: todolistId1, title: "Что выучить:", filter: "All"},
-//         {id: todolistId2, title: "Что купить:", filter: "Active"}
+//         {id: todolistId1, title: "Что выучить:", filter: "All", order: 0, addedDate: ""},
+//         {id: todolistId2, title: "Что купить:", filter: "Active", order: 0, addedDate: ""}
 //     ])
 //     const [tasksObj, dispatchToTasks] = useReducer(tasksReducer,{
 //         [todolistId1]: [
-//             {id: v1(), title: 'HTML&CSS', isDone: true},
-//             {id: v1(), title: 'JS', isDone: false},
-//             {id: v1(), title: 'React', isDone: false}
+//             {
+//                 id: v1(),
+//                 title: "Task Title",
+//                 order: 0,
+//                 addedDate: "",
+//                 status: TaskStatuses.New,
+//                 priority: TaskPriorities.Low,
+//                 startDate: "",
+//                 deadline: "",
+//                 completed: false,
+//                 todoListId: todolistId1,
+//                 description: ""
+//             },
+//             {
+//                 id: v1(),
+//                 title: "Task Title",
+//                 order: 0,
+//                 addedDate: "",
+//                 status: TaskStatuses.New,
+//                 priority: TaskPriorities.Low,
+//                 startDate: "",
+//                 deadline: "",
+//                 completed: false,
+//                 todoListId: todolistId1,
+//                 description: ""
+//             }
+//
 //         ],
 //         [todolistId2]: [
-//             {id: v1(), title: 'Молоко', isDone: false},
-//             {id: v1(), title: 'Сахар', isDone: true},
-//             {id: v1(), title: 'Кофе', isDone: false}
+//             {
+//                 id: v1(),
+//                 title: "Task Title",
+//                 order: 0,
+//                 addedDate: "",
+//                 status: TaskStatuses.New,
+//                 priority: TaskPriorities.Low,
+//                 startDate: "",
+//                 deadline: "",
+//                 completed: false,
+//                 todoListId: todolistId2,
+//                 description: ""
+//             },
+//             {
+//                 id: v1(),
+//                 title: "Task Title",
+//                 order: 0,
+//                 addedDate: "",
+//                 status: TaskStatuses.New,
+//                 priority: TaskPriorities.Low,
+//                 startDate: "",
+//                 deadline: "",
+//                 completed: false,
+//                 todoListId: todolistId2,
+//                 description: ""
+//             }
 //         ]
 //     })
 //
@@ -52,7 +94,7 @@ import React, {useReducer, useState} from 'react';
 //     const addTask = (title: string, todolistID: string) =>  dispatchToTasks(addTaskAC(title, todolistID))
 //
 //
-//     const changeTaskStatus = (taskID: string, isDone: boolean, todolistID: string) => {
+//     const changeTaskStatus = (taskID: string, status: TaskStatuses, todolistID: string) => {
 //        dispatchToTasks(changeTaskStatusAC(taskID,isDone,todolistID))
 //     }
 //     const changeTaskTitle = (taskId: string, NewTitle: string, todolistID: string) => {

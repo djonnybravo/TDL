@@ -3,6 +3,8 @@ import React, {FC, useState} from "react";
 import Task, {TaskPropsType} from "../components/Task";
 
 import {action} from "@storybook/addon-actions";
+import {TaskPriorities, TaskStatuses} from "../api/todolists-api";
+import {v1} from "uuid";
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 const meta: Meta<typeof Task> = {
@@ -15,7 +17,19 @@ const meta: Meta<typeof Task> = {
         removeTask: action("ChangeTaskStatus"),
         changeTaskStatus: action("ChangeTaskStatus"),
         changeTaskTitle: action("ChangeTaskStatus"),
-        task: {id: 'uuid', title: "Task", isDone: false},
+        task: {
+            id: v1(),
+            title: "Task Title",
+            order: 0,
+            addedDate: "",
+            status: TaskStatuses.New,
+            priority: TaskPriorities.Low,
+            startDate: "",
+            deadline: "",
+            completed: false,
+            todoListId: "asdasd_asdas-asdas",
+            description: ""
+        },
         todolistID: "uuid"
     }
 
@@ -34,7 +48,19 @@ export const TaskIsDoneStory: Story = {
     // More on args: https://storybook.js.org/docs/react/writing-stories/args
     args: {
 
-        task: {id: 'uuid', title: "Task", isDone: true},
+        task: {
+            id: v1(),
+            title: "Task Title",
+            order: 0,
+            addedDate: "",
+            status: TaskStatuses.New,
+            priority: TaskPriorities.Low,
+            startDate: "",
+            deadline: "",
+            completed: false,
+            todoListId: "asdasd_asdas-asdas",
+            description: ""
+        },
 
     }
 };
@@ -43,7 +69,7 @@ const TaskWithHook: FC<TaskPropsType> = (args: TaskPropsType) => {
     const [task, setTask] = useState(args.task)
 
     const changeTaskStatus = () => {
-        setTask({...task, isDone: !task.isDone})
+        setTask({...task, status: TaskStatuses.New ?  TaskStatuses.Completed :  TaskStatuses.New })
 
     }
     const changeTaskTitle = () => {
