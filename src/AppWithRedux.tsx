@@ -30,8 +30,7 @@ function AppWithRedux() {
     useEffect( () => {
         todolistsApi.getTodolist()
             .then((res) =>{
-                let todolists = res.data
-                dispatch(setTodolistsAC(todolists))
+                dispatch(setTodolistsAC(res.data))
             })
     }, [])
 
