@@ -5,15 +5,15 @@ import AddItemForm from "./components/AddItemForm";
 import {
     AddTodolistAC,
     ChangeFilterTodolistAC,
-    ChangeTitleTodolistAC, FilterValuesType,
-    RemoveTodolistAC, setTodolistsAC, TodolistDomainType,
+    ChangeTitleTodolistAC, fetchTodolistsTC, FilterValuesType,
+    RemoveTodolistAC, TodolistDomainType,
 } from "./state/todolists-reducer";
 import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC} from "./state/tasks-reducer";
 import {useDispatch, useSelector} from "react-redux";
-import {AppRootStateType} from "./state/store";
+import {AppRootStateType, useAppDispatch} from "./state/store";
 import {AppBar, Box, Button, Container, Grid, IconButton, Paper, Toolbar, Typography} from "@mui/material";
 import MenuIcon from '@mui/icons-material/Menu';
-import {TaskStatuses, TaskType, todolistsApi} from "./api/todolists-api";
+import {TaskStatuses, TaskType} from "./api/todolists-api";
 
 
 
@@ -25,13 +25,10 @@ export type TasksStateType = {
 function AppWithRedux() {
     console.log("app rendering")
 
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
 
     useEffect( () => {
-        todolistsApi.getTodolist()
-            .then((res) =>{
-                dispatch(setTodolistsAC(res.data))
-            })
+        dispatch(fetchTodolistsTC())
     }, [])
 
 
