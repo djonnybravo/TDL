@@ -40,6 +40,7 @@ export type ChangeTaskTitleActionType = {
 }
 export type GetTaskForTodolistActionType = {
     type: "GET-TASK-FOR-TODOLIST"
+    tasks: TaskType[]
     todolistID: string
 }
 
@@ -122,7 +123,7 @@ export const changeTaskTitleAC = (taskID: string, title: string, todolistID:stri
     return {type: "CHANGE-TASK-TITLE", taskID: taskID, title: title, todolistID: todolistID}
 }
 
-export const getTaskForTodolistAC = (todolistID: string): GetTaskForTodolistActionType => {
-    return {type: "GET-TASK-FOR-TODOLIST", todolistID}
+export const getTaskForTodolistAC = (todolistID: string, tasks: TaskType[]): GetTaskForTodolistActionType => {
+    return {type: "GET-TASK-FOR-TODOLIST", todolistID, tasks}
 }
 
