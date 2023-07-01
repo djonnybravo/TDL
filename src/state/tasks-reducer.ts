@@ -13,7 +13,7 @@ import {Dispatch} from "redux";
 export type ActionTypes =
     RemoveTaskActionType | AddTaskActionType |
     ChangeTaskStatusActionType | ChangeTaskTitleActionType |
-    AddTodolistActionType | RemoveTodolistActionType | SetTodolistsActionType
+    AddTodolistActionType | RemoveTodolistActionType | SetTodolistsActionType | GetTaskForTodolistActionType
 
 export type RemoveTaskActionType = {
     type: "REMOVE-TASK"
@@ -50,6 +50,14 @@ const initState: TasksStateType = {}
 export const tasksReducer = (state: TasksStateType = initState, action: ActionTypes): TasksStateType => {
     switch (action.type){
 
+        case "GET-TASK-FOR-TODOLIST": {
+            const stateCopy = {...state}
+
+            stateCopy[action.todolistID] = action.tasks
+
+            return stateCopy
+        }
+
         case "SET-TODOLISTS": {
 
             const stateCopy = {...state}
@@ -58,8 +66,6 @@ export const tasksReducer = (state: TasksStateType = initState, action: ActionTy
             })
             return stateCopy;
         }
-
-
         case "REMOVE-TASK": {
             return {...state,
                 [action.todolistID]:state[action.todolistID].
@@ -127,3 +133,14 @@ export const getTaskForTodolistAC = (todolistID: string, tasks: TaskType[]): Get
     return {type: "GET-TASK-FOR-TODOLIST", todolistID, tasks}
 }
 
+
+
+
+export const fetchTasksTC = (todolistID: string) => {
+    return (dispatch: Dispatch) => {
+        todolistsApi.getTasks(todolistID)
+            .then((res) => {
+                dispatch(getTaskForTodolistAC(todolistID, res.data.items))
+            })
+    }
+}
