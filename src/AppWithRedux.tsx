@@ -8,7 +8,14 @@ import {
     ChangeTitleTodolistAC, fetchTodolistsTC, FilterValuesType,
     RemoveTodolistAC, TodolistDomainType,
 } from "./state/todolists-reducer";
-import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC} from "./state/tasks-reducer";
+import {
+    addTaskAC,
+    changeTaskStatusAC,
+    changeTaskTitleAC,
+    createTaskTC,
+    removeTaskAC,
+    removeTaskTC
+} from "./state/tasks-reducer";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType, useAppDispatch} from "./state/store";
 import {AppBar, Box, Button, Container, Grid, IconButton, Paper, Toolbar, Typography} from "@mui/material";
@@ -40,11 +47,16 @@ function AppWithRedux() {
 
 
 
-    const removeTask = useCallback((taskID: string, todolistID: string) => dispatch(removeTaskAC(taskID, todolistID)), [dispatch])
-    const addTask = useCallback((title: string, todolistID: string) => dispatch(addTaskAC(title, todolistID)), [dispatch])
+    const removeTask = useCallback((taskID: string, todolistID: string) => dispatch(removeTaskTC(todolistID, taskID)), [dispatch])
+    const addTask = useCallback((title: string, todolistID: string) => dispatch(createTaskTC(todolistID, title)), [dispatch])
     const changeTaskStatus = useCallback((taskID: string, status: TaskStatuses, todolistID: string) => {
+
+
+
+
         dispatch(changeTaskStatusAC(taskID, status, todolistID))
     }, [dispatch])
+
     const changeTaskTitle = useCallback((taskId: string, NewTitle: string, todolistID: string) => {
         dispatch(changeTaskTitleAC(taskId, NewTitle, todolistID))
     }, [dispatch])
