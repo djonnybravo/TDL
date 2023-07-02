@@ -74,14 +74,7 @@ export const tasksReducer = (state: TasksStateType = initState, action: ActionTy
                 filter(task => task.id !== action.taskID)}
         }
         case "ADD-TASK": {
-            return {...state, [action.todolistID]: [{id: v1(), title: action.title, status: TaskStatuses.New, order: 0,
-                    addedDate: "",
-                    priority: TaskPriorities.Low,
-                    startDate: "",
-                    deadline: "",
-                    completed: false,
-                    todoListId: todolistId1,
-                    description: "" }, ...state[action.todolistID]]}
+            return {...state, [action.todolistID]: [action.task, ...state[action.todolistID]]}
         }
         case "CHANGE-TASK-STATUS": {
             // let tasks = state[action.todolistID]
