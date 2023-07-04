@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import axios from "axios";
-import {todolistsApi} from "../api/todolists-api";
+import {TaskPriorities, TaskStatuses, todolistsAPI} from "../api/todolists-api";
 
 export default {
     title: 'API/TODOLIST'
@@ -14,7 +13,7 @@ export const GetTodolists = () => {
         // который в виде строки будем отображать в div-ке
 
 
-        todolistsApi.getTodolist()
+        todolistsAPI.getTodolists()
             .then((res) => {
                 console.log(res)
                 setState(res.data)
@@ -28,7 +27,7 @@ export const CreateTodolist = () => {
     const [state, setState] = useState<any>(null)
 
     useEffect(() => {
-        todolistsApi.createTodolist("SOME NEW TITLE2")
+        todolistsAPI.createTodolist("SOME NEW TITLE2")
             .then((res) => {
                     console.log(res)
                     setState(res.data)
@@ -46,7 +45,7 @@ export const DeleteTodolist = () => {
 
     useEffect(() => {
 
-        todolistsApi.deleteTodolist("48b2234e-b8d6-4702-91dc-b16f15bd78c9")
+        todolistsAPI.deleteTodolist("48b2234e-b8d6-4702-91dc-b16f15bd78c9")
             .then((res) => {
                     console.log(res)
                     setState(res.data)
@@ -62,7 +61,7 @@ export const UpdateTodolistTitle = () => {
     const [state, setState] = useState<any>(null)
     useEffect(() => {
 
-        todolistsApi.updateTodolistTitle("75a28f95-0548-403c-ab61-0b6675dab02d", "SOME NEW TITLE 33")
+        todolistsAPI.updateTodolist("75a28f95-0548-403c-ab61-0b6675dab02d", "SOME NEW TITLE 33")
             .then((res) => {
                     console.log(res)
                     setState(res.data)
@@ -79,7 +78,7 @@ export const GetTasks = () => {
     useEffect(() => {
 
 
-        todolistsApi.getTasks("258d8c5f-3ad7-401b-ac6d-9c18ae4d65ce")
+        todolistsAPI.getTasks("258d8c5f-3ad7-401b-ac6d-9c18ae4d65ce")
             .then((res) => {
                 console.log(res)
                 setState(res.data)
@@ -93,7 +92,7 @@ export const CreateTaskInTodolist = () => {
     const [state, setState] = useState<any>(null)
 
     useEffect(() => {
-        todolistsApi.createTask("258d8c5f-3ad7-401b-ac6d-9c18ae4d65ce", "New Task")
+        todolistsAPI.createTask("258d8c5f-3ad7-401b-ac6d-9c18ae4d65ce", "New Task")
             .then((res) => {
                 console.log(res)
                 setState(res.data.data.item)
@@ -105,11 +104,12 @@ export const CreateTaskInTodolist = () => {
         {JSON.stringify(state)}
     </div>
 }
-export const ChangeTaskTitle = () => {
+export const UpdateTask = () => {
     const [state, setState] = useState<any>(null)
+    const model = {title: "NEW TITLE!", status: TaskStatuses.New, deadline: "", description: "", priority: TaskPriorities.Low, startDate: ""}
     useEffect(() => {
 
-        todolistsApi.changeTaskTitle("258d8c5f-3ad7-401b-ac6d-9c18ae4d65ce", "36b8a887-c6ab-4b92-94b5-ccf2d2a055ad","SOME NEW TITLE")
+        todolistsAPI.updateTask("258d8c5f-3ad7-401b-ac6d-9c18ae4d65ce", "36b8a887-c6ab-4b92-94b5-ccf2d2a055ad",model )
             .then((res) => {
                 console.log(res)
                 setState(res.data)
@@ -124,7 +124,7 @@ export const DeleteTask = () => {
     useEffect(() => {
 
 
-        todolistsApi.deleteTask("258d8c5f-3ad7-401b-ac6d-9c18ae4d65ce", "0a2780ad-52bc-4deb-a41e-849477271147")
+        todolistsAPI.deleteTask("258d8c5f-3ad7-401b-ac6d-9c18ae4d65ce", "0a2780ad-52bc-4deb-a41e-849477271147")
             .then((res) => {
                 console.log(res)
                 setState(res.data)
