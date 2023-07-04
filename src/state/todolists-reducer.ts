@@ -1,8 +1,6 @@
 import {v1} from "uuid";
 import {todolistsAPI, TodolistType} from "../api/todolists-api";
 import {Dispatch} from "redux";
-import todolist from "../components/Todolist";
-import {changeTaskTitleAC} from "./tasks-reducer";
 
 
 type ActionsType = RemoveTodolistActionType | AddTodolistActionType | ChangeTodolistFilterActionType | ChangeTodolistTitleActionType | SetTodolistsActionType

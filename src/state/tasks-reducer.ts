@@ -37,7 +37,6 @@ export const tasksReducer = (state: TasksStateType = initState, action: ActionsT
         case "SET-TASKS": {
               return {...state, [action.todolistID]: action.tasks }
         }
-
         case "SET-TODOLISTS": {
 
             const stateCopy = {...state}
@@ -54,7 +53,6 @@ export const tasksReducer = (state: TasksStateType = initState, action: ActionsT
         case "ADD-TASK": {
             return {...state, [action.task.todoListId]: [action.task, ...state[action.task.todoListId]]}
         }
-        case 'UPDATE-TASK':
 
         case 'UPDATE-TASK':
             return {
