@@ -77,6 +77,7 @@ export type TaskType = {
     todoListId: string
     order: number
     addedDate: string
+    completed: boolean
 }
 export type UpdateTaskModelType = {
     title: string
