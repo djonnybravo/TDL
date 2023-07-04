@@ -7,7 +7,7 @@ import {
     todolistId1,
     todolistId2
 } from "./todolists-reducer";
-import {TaskPriorities, TaskStatuses, TaskType, todolistsApi} from "../api/todolists-api";
+import {TaskPriorities, TaskStatuses, TaskType, todolistsAPI} from "../api/todolists-api";
 import {Dispatch} from "redux";
 import {AppRootStateType} from "./store";
 import task from "../components/Task";
@@ -134,7 +134,7 @@ export const getTaskForTodolistAC = (todolistID: string, tasks: TaskType[]): Get
 
 export const fetchTasksTC = (todolistID: string) => {
     return (dispatch: Dispatch) => {
-        todolistsApi.getTasks(todolistID)
+        todolistsAPI.getTasks(todolistID)
             .then((res) => {
                 dispatch(getTaskForTodolistAC(todolistID, res.data.items))
             })
@@ -144,7 +144,7 @@ export const fetchTasksTC = (todolistID: string) => {
 export const removeTaskTC = (todolistID: string, taskID: string) => {
 
     return (dispatch: Dispatch) => {
-        todolistsApi.deleteTask(todolistID, taskID).then( () => {
+        todolistsAPI.deleteTask(todolistID, taskID).then( () => {
             dispatch(removeTaskAC(todolistID, taskID))
             }
         )
@@ -155,7 +155,7 @@ export const removeTaskTC = (todolistID: string, taskID: string) => {
 export const createTaskTC = (todolistID: string, title: string) => {
 
     return (dispatch: Dispatch) => {
-        todolistsApi.createTask(todolistID, title).then((res) => {
+        todolistsAPI.createTask(todolistID, title).then((res) => {
                 dispatch(addTaskAC(res.data.data.item, title))
             }
         )

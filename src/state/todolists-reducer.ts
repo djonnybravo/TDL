@@ -1,5 +1,5 @@
 import {v1} from "uuid";
-import {todolistsApi, TodolistType} from "../api/todolists-api";
+import {todolistsAPI, TodolistType} from "../api/todolists-api";
 import {Dispatch} from "redux";
 
 
@@ -118,7 +118,7 @@ export const setTodolistsAC = (todolists: Array<TodolistType>): SetTodolistsActi
 
 export const fetchTodolistsTC = () => {
     return (dispatch: Dispatch) => {
-        todolistsApi.getTodolist()
+        todolistsAPI.getTodolists()
             .then((res) => {
                 dispatch(setTodolistsAC(res.data))
             })
