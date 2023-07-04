@@ -30,11 +30,9 @@ const Todolist = memo((props: PropsType) => {
     console.log("todolist render")
     const dispatch = useAppDispatch()
 
-    useEffect( () => {
+    useEffect(() => {
         dispatch(fetchTasksTC(props.todolistID))
     }, [])
-
-
 
 
     const onAllFilterClick = () => props.changeFilter('All', props.todolistID)
