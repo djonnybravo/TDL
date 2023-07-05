@@ -9,9 +9,8 @@ import {
     TodolistDomainType
 } from "./Todolist/todolists-reducer";
 import {useSelector} from "react-redux";
-import {createTaskTC, removeTaskTC, updateTaskTC} from "./Todolist/Task/tasks-reducer";
+import {createTaskTC, removeTaskTC, TasksStateType, updateTaskTC} from "./Todolist/Task/tasks-reducer";
 import {TaskStatuses} from "../api/todolists-api";
-import {TasksStateType} from "../App/App";
 import {Container, Grid, Paper} from "@mui/material";
 import AddItemForm from "../components/UI/AddItemForm/AddItemForm";
 import Todolist from "./Todolist/Todolist";
