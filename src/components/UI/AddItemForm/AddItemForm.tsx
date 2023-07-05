@@ -8,24 +8,24 @@ export type AddItemFormPropsType = {
 
 const AddItemForm = React.memo((props: AddItemFormPropsType) => {
     console.log("AdditemForm render")
-    const [newTaskTitle, setNewTaskTitle] = useState(' ')
+    const [title, setTitle] = useState(' ')
     const [error, setError] = useState(false)
 
     const onChangeInputHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        setNewTaskTitle(e.currentTarget.value)
+        setTitle(e.currentTarget.value)
         setError(false)
     }
     const onKeyPressInputHandler = (e: KeyboardEvent<HTMLInputElement>) => {
         if (e.charCode == 13) {
-            props.addItem(newTaskTitle);
-            setNewTaskTitle('')
+            props.addItem(title);
+            setTitle('')
             setError(false)
         }
     }
     const addItem = () => {
-        if (newTaskTitle.trim() !== "") {
-            props.addItem(newTaskTitle);
-            setNewTaskTitle('')
+        if (title.trim() !== "") {
+            props.addItem(title);
+            setTitle('')
 
         } else {
             setError(true)
@@ -40,7 +40,7 @@ const AddItemForm = React.memo((props: AddItemFormPropsType) => {
                 variant="standard"
                 error={error}
                 helperText="Поле обязательно и не может быть пустым"
-                value={newTaskTitle}
+                value={title}
                 onChange={onChangeInputHandler}
                 onKeyPress={onKeyPressInputHandler}
 

@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
-import './App.css';
-import Todolist from "./components/Todolist";
+import '../App/App.css';
+import Todolist from "../features/Todolist/Todolist";
 import {v1} from "uuid";
-import AddItemForm from "./components/AddItemForm";
-import {FilterValuesType, TodolistDomainType} from "./state/todolists-reducer";
-import {TaskPriorities, TaskStatuses, TaskType} from "./api/todolists-api";
+import AddItemForm from "../components/UI/AddItemForm/AddItemForm";
+import {FilterValuesType, TodolistDomainType} from "../features/Todolist/todolists-reducer";
+import {TaskPriorities, TaskStatuses, TaskType} from "../api/todolists-api";
 
 
 export type TasksStateType = {

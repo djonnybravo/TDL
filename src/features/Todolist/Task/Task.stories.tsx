@@ -1,9 +1,9 @@
 import type {Meta, StoryObj} from '@storybook/react';
 import React, {FC, useState} from "react";
-import Task, {TaskPropsType} from "../components/Task";
+import Task, {TaskPropsType} from "./Task";
 
 import {action} from "@storybook/addon-actions";
-import {TaskPriorities, TaskStatuses} from "../api/todolists-api";
+import {TaskPriorities, TaskStatuses} from "../../../api/todolists-api";
 import {v1} from "uuid";
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction#default-export

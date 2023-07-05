@@ -1,32 +1,22 @@
 import React, {useCallback, useEffect} from 'react';
-import './App.css';
-import Todolist from "./components/Todolist";
-import AddItemForm from "./components/AddItemForm";
+import {AppRootStateType, useAppDispatch} from "../App/store";
 import {
-
     ChangeTodolistFilterAC,
-     changeTodolistTitleTC, createTodolistTC, fetchTodolistsTC, FilterValuesType,
-     removeTodolistTC, TodolistDomainType,
-} from "./state/todolists-reducer";
-import {
-    createTaskTC,
-    removeTaskTC, updateTaskTC
-} from "./state/tasks-reducer";
-import { useSelector} from "react-redux";
-import {AppRootStateType, useAppDispatch} from "./state/store";
-import {AppBar, Box, Button, Container, Grid, IconButton, Paper, Toolbar, Typography} from "@mui/material";
-import MenuIcon from '@mui/icons-material/Menu';
-import {TaskStatuses, TaskType} from "./api/todolists-api";
+    changeTodolistTitleTC,
+    createTodolistTC,
+    fetchTodolistsTC, FilterValuesType,
+    removeTodolistTC,
+    TodolistDomainType
+} from "./Todolist/todolists-reducer";
+import {useSelector} from "react-redux";
+import {createTaskTC, removeTaskTC, updateTaskTC} from "./Todolist/Task/tasks-reducer";
+import {TaskStatuses} from "../api/todolists-api";
+import {TasksStateType} from "../App/App";
+import {Container, Grid, Paper} from "@mui/material";
+import AddItemForm from "../components/UI/AddItemForm/AddItemForm";
+import Todolist from "./Todolist/Todolist";
 
-
-
-
-export type TasksStateType = {
-    [key: string]: TaskType[]
-}
-
-function AppWithRedux() {
-    console.log("app rendering")
+const TodolistList = () => {
 
     const dispatch = useAppDispatch()
 
@@ -61,29 +51,8 @@ function AppWithRedux() {
         dispatch(ChangeTodolistFilterAC(todolistID, value))
     }, [dispatch])
 
-
     return (
-        <div className="App">
-            <Box>
-                <AppBar position="static">
-                    <Toolbar>
-                        <IconButton
-                            size="large"
-                            edge="start"
-                            color="inherit"
-                            aria-label="menu"
-                            sx={{mr: 2}}
-                        >
-                            <MenuIcon/>
-                        </IconButton>
-                        <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
-                            News
-                        </Typography>
-                        <Button color="inherit">Login</Button>
-                    </Toolbar>
-                </AppBar>
-            </Box>
-
+        <>
             <Grid container style={{padding: "20px"}} spacing={4}>
                 <Grid item >
                     <Paper style={{padding: "20px", margin: "0"}} elevation={24}   >
@@ -118,8 +87,8 @@ function AppWithRedux() {
                     }
                 </Grid>
             </Container>
-        </div>
+        </>
     );
+};
 
-}
-export default AppWithRedux;
+export default TodolistList;
