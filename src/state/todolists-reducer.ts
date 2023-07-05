@@ -46,11 +46,11 @@ export const todolistsReducer = (state: Array<TodolistDomainType> = [], action: 
 }
 
 //ACTION CREATORS
-export const RemoveTodolistAC = (todolistId: string) => ({type: 'REMOVE-TODOLIST', todolistID: todolistId}) as const
-export const AddTodolistAC = ( newTodolist: TodolistType) => ({type: 'ADD-TODOLIST', newTodolist}) as const
-export const ChangeTodolistTitleAC = (todolistId: string, title: string) =>  ({type: 'CHANGE-TODOLIST-TITLE', todolistId, title}) as const
-export const ChangeTodolistFilterAC = (todolistId: string, filter: FilterValuesType) => ({type: 'CHANGE-TODOLIST-FILTER', todolistId, filter}) as const
-export const setTodolistsAC = (todolists: Array<TodolistType>) => ({type: 'SET-TODOLISTS', todolists}) as const
+export const RemoveTodolistAC = (todolistId: string) => ({type: 'REMOVE-TODOLIST', todolistID: todolistId} as const)
+export const AddTodolistAC = ( newTodolist: TodolistType) => ({type: 'ADD-TODOLIST', newTodolist} as const)
+export const ChangeTodolistTitleAC = (todolistId: string, title: string) =>  ({type: 'CHANGE-TODOLIST-TITLE', todolistId, title} as const)
+export const ChangeTodolistFilterAC = (todolistId: string, filter: FilterValuesType) => ({type: 'CHANGE-TODOLIST-FILTER', todolistId, filter} as const)
+export const setTodolistsAC = (todolists: Array<TodolistType>) => ({type: 'SET-TODOLISTS', todolists} as const)
 
 
 
@@ -103,3 +103,9 @@ export type FilterValuesType = 'All' | 'Completed' | 'Active'
 export type TodolistDomainType = TodolistType & {
     filter: FilterValuesType
 }
+export type AddTodolistActionType = ReturnType<typeof RemoveTodolistAC>
+export type RemoveTodolistActionType = ReturnType<typeof AddTodolistAC>
+export type SetTodolistsActionType = ReturnType<typeof setTodolistsAC>
+
+
+
