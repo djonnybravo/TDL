@@ -72,7 +72,7 @@ export const createTodolistTC = (title: string) => {
             })
     }
 }
-export const removeTodolsitTC = (todolistID: string) => {
+export const removeTodolistTC = (todolistID: string) => {
     return (dispatch: Dispatch) => {
         todolistsAPI.deleteTodolist(todolistID)
             .then((res) => {
