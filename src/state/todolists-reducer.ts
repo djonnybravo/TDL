@@ -89,13 +89,12 @@ export const changeTodolistTitleTC = (todolistID: string, title: string) => {
     }
 }
 
+
 //types
-
-
 type ActionsType =
     | ReturnType<typeof RemoveTodolistAC>
     | ReturnType<typeof setTodolistsAC>
-    | ReturnType<typeof AddTodolistAC >
+    | ReturnType<typeof AddTodolistAC>
     | ReturnType<typeof ChangeTitleTodolistAC>
     | ReturnType<typeof ChangeFilterTodolistAC>
 
