@@ -120,7 +120,7 @@ function AppWithRedux() {
             </Container>
         </div>
     );
-    ;
+
 }
 
 export default AppWithRedux;
