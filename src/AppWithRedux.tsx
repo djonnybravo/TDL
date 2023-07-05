@@ -4,7 +4,7 @@ import Todolist from "./components/Todolist";
 import AddItemForm from "./components/AddItemForm";
 import {
 
-    ChangeFilterTodolistAC,
+    ChangeTodolistFilterAC,
      changeTodolistTitleTC, createTodolistTC, fetchTodolistsTC, FilterValuesType,
      removeTodolistTC, TodolistDomainType,
 } from "./state/todolists-reducer";
@@ -58,7 +58,7 @@ function AppWithRedux() {
         dispatch(changeTodolistTitleTC(todolistID, newTitle))
     }, [])
     const changeFilter = useCallback((value: FilterValuesType, todolistID: string) => {
-        dispatch(ChangeFilterTodolistAC(todolistID, value))
+        dispatch(ChangeTodolistFilterAC(todolistID, value))
     }, [])
 
 
