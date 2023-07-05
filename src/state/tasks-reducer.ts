@@ -37,14 +37,7 @@ export const tasksReducer = (state: TasksStateType = initState, action: ActionsT
         case "SET-TASKS": {
               return {...state, [action.todolistID]: action.tasks }
         }
-        case "SET-TODOLISTS": {
 
-            const stateCopy = {...state}
-            action.todolists.forEach((tl) => {
-                stateCopy[tl.id] = []
-            })
-            return stateCopy;
-        }
         case "REMOVE-TASK": {
             return {...state,
                 [action.todolistID]:state[action.todolistID].
@@ -60,6 +53,15 @@ export const tasksReducer = (state: TasksStateType = initState, action: ActionsT
                 [action.todolistID]: state[action.todolistID]
                     .map(t => t.id === action.taskID ? {...t, ...action.model} : t)
             }
+        case "SET-TODOLISTS": {
+
+            const stateCopy = {...state}
+            action.todolists.forEach((tl) => {
+                stateCopy[tl.id] = []
+            })
+            return stateCopy;
+        }
+
         case "ADD-TODOLIST": {
             return {...state, [action.newTodolist.id]: []}
         }
