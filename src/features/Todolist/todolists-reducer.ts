@@ -50,7 +50,7 @@ export const setTodolistsAC = (todolists: Array<TodolistType>) => ({type: 'SET-T
 
 //THUNK CREATORS
 export const fetchTodolistsTC = () => {
-    return (dispatch: Dispatch) => {
+    return (dispatch: Dispatch<ActionsType>) => {
         todolistsAPI.getTodolists()
             .then((res) => {
                 dispatch(setTodolistsAC(res.data))
@@ -58,7 +58,7 @@ export const fetchTodolistsTC = () => {
     }
 }
 export const createTodolistTC = (title: string) => {
-    return (dispatch: Dispatch) => {
+    return (dispatch: Dispatch<ActionsType>) => {
         todolistsAPI.createTodolist(title)
             .then((res) => {
                 dispatch(AddTodolistAC(res.data.data.item))
