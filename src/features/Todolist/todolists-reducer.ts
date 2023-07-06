@@ -66,7 +66,7 @@ export const createTodolistTC = (title: string) => {
     }
 }
 export const removeTodolistTC = (todolistID: string) => {
-    return (dispatch: Dispatch) => {
+    return (dispatch: Dispatch<ActionsType>) => {
         todolistsAPI.deleteTodolist(todolistID)
             .then((res) => {
                 dispatch(RemoveTodolistAC(todolistID))
