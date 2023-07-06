@@ -74,7 +74,7 @@ export const removeTodolistTC = (todolistID: string) => {
     }
 }
 export const changeTodolistTitleTC = (todolistID: string, title: string) => {
-    return (dispatch: Dispatch) => {
+    return (dispatch: Dispatch<ActionsType>) => {
         todolistsAPI.updateTodolist(todolistID, title)
             .then((res) => {
                 dispatch(ChangeTodolistTitleAC(todolistID, title))
