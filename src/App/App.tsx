@@ -17,7 +17,7 @@ function App() {
         <div className="App">
             <AppHeader/>
             <TodolistList/>
-            <SnackbarMUI alertType={"success"} message={"This is an error message"} />
+            <SnackbarMUI alertType={"success"}  />
         </div>
     );
 
