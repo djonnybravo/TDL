@@ -1,11 +1,9 @@
 import * as React from 'react';
-import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
-import Snackbar, {SnackbarOrigin} from '@mui/material/Snackbar';
+import Snackbar from '@mui/material/Snackbar';
 import MuiAlert, { AlertProps } from '@mui/material/Alert';
-import {Box} from "@mui/material";
 import {useSelector} from "react-redux";
-import {AppRootStateType} from "../../../App/store";
+import {AppRootStateType, useAppDispatch,} from "../../../App/store";
+import {setErrorAC} from "../../../App/app-reducer";
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
     props,
@@ -22,12 +20,13 @@ export type SnackbarMUIPropsType = {
 export function SnackbarMUI(props: SnackbarMUIPropsType) {
 
     const error = useSelector<AppRootStateType, string | null>(state => state.app.error)
+    const dispatch = useAppDispatch()
     const vertical = 'bottom'
     const horizontal = 'center'
 
     const isOpen = error !== null
     const handleClose = () => {
-
+       dispatch(setErrorAC(null))
     };
 
 
