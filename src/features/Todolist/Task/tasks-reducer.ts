@@ -6,7 +6,7 @@ import {
 import {Dispatch} from "redux";
 import {TaskPriorities, TaskStatuses, TaskType, todolistsAPI, UpdateTaskModelType} from "../../../api/todolists-api";
 import {AppRootStateType} from "../../../App/store";
-import {setErrorAC} from "../../../App/app-reducer";
+import {setErrorAC, setStatusAC} from "../../../App/app-reducer";
 
 // types
 export type UpdateDomainTaskModelType = {
@@ -91,10 +91,14 @@ export const setTasksAC = ( todolistID: string, tasks: Array<TaskType>,) =>
 
 //THUNKS
 export const fetchTasksTC = (todolistID: string) => {
+
     return (dispatch: Dispatch) => {
+        dispatch(setStatusAC('loading'))
         todolistsAPI.getTasks(todolistID)
             .then((res) => {
                 dispatch(setTasksAC(todolistID, res.data.items))
+                dispatch(setStatusAC('idle'))
+
             })
     }
 }
