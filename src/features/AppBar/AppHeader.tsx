@@ -1,5 +1,5 @@
 import React from 'react';
-import {AppBar, Box, Button, IconButton, Toolbar, Typography} from "@mui/material";
+import {AppBar, Box, Button, IconButton, LinearProgress, Toolbar, Typography} from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 
 const AppHeader = () => {
@@ -21,6 +21,7 @@ const AppHeader = () => {
                     </Typography>
                     <Button color="inherit">Login</Button>
                 </Toolbar>
+                <LinearProgress/>
             </AppBar>
         </Box>
     );
