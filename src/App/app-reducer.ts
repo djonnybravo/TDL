@@ -21,7 +21,7 @@ export const AppReducer = (state: initialStateType = initialState, action: Actio
 
 const initialState: initialStateType = {
     status: "idle",
-    error: null
+    error: "ERER"
 }
 
 type initialStateType = {
