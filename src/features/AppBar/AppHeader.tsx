@@ -1,15 +1,8 @@
 import React from 'react';
 import {AppBar, Box, Button, IconButton, LinearProgress, Toolbar, Typography} from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
-import {useSelector} from "react-redux";
-import {AppRootStateType} from "../../App/store";
-import {RequestStatusType} from "../../App/app-reducer";
 
 const AppHeader = () => {
-
-    const requestStatus = useSelector<AppRootStateType, RequestStatusType>(state => state.app.status)
-
-
     return (
         <Box>
             <AppBar position="static">
@@ -28,9 +21,7 @@ const AppHeader = () => {
                     </Typography>
                     <Button color="inherit">Login</Button>
                 </Toolbar>
-                {
-                    requestStatus === "loading" && <LinearProgress/>
-                }
+                <LinearProgress/>
             </AppBar>
         </Box>
     );

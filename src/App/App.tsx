@@ -8,7 +8,9 @@ import {SnackbarMUI} from "../components/UI/Snackbar/SnackbarMUI";
 
 
 
+
 function App() {
+
     console.log("app rendering")
 
     return (
