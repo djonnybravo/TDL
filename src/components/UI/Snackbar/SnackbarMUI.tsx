@@ -4,6 +4,8 @@ import Button from '@mui/material/Button';
 import Snackbar, {SnackbarOrigin} from '@mui/material/Snackbar';
 import MuiAlert, { AlertProps } from '@mui/material/Alert';
 import {Box} from "@mui/material";
+import {useSelector} from "react-redux";
+import {AppRootStateType} from "../../../App/store";
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
     props,
@@ -15,33 +17,29 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
 
 export type SnackbarMUIPropsType = {
     alertType: "error" | "warning" | "info" | "success"
-    message: string
-}
-interface State extends SnackbarOrigin {
-    open: boolean;
 }
 
 export function SnackbarMUI(props: SnackbarMUIPropsType) {
 
-    const [state, setState] = React.useState<State>({
-        open: true,
-        vertical: 'bottom',
-        horizontal: 'center',
-    });
-    const { vertical, horizontal, open } = state;
+    const error = useSelector<AppRootStateType, string | null>(state => state.app.error)
+    const vertical = 'bottom'
+    const horizontal = 'center'
 
+    const isOpen = error !== null
     const handleClose = () => {
-        setState({ ...state, open: false });
+
     };
+
 
     return (
 
+        <Snackbar open={isOpen} autoHideDuration={6000} onClose={handleClose} anchorOrigin={{vertical, horizontal}} >
+            <Alert onClose={handleClose} severity={props.alertType} sx={{ width: '100%' }}>
+                {error}
+            </Alert>
+        </Snackbar>
 
-            <Snackbar open={open} autoHideDuration={6000} onClose={handleClose} anchorOrigin={{ vertical, horizontal }} >
-                <Alert onClose={handleClose} severity={props.alertType} sx={{ width: '100%' }}>
-                    {props.message}
-                </Alert>
-            </Snackbar>
+
 
 
     );
