@@ -26,8 +26,11 @@ const initialState: initialStateType = {
 
 type initialStateType = {
 
-    status: 'idle' | 'loading' | 'success' | 'failed'
+    status: statusType
     error: string | null
 }
-
+type statusType = 'idle' | 'loading' | 'success' | 'failed'
 type ActionsTypes = any
+
+export const SetStatusAC = (status: statusType) => ({type: "APP/SET-STATUS", status})
+export const SetErrorAC = (error: string | null) => ({type: "APP/SET-ERROR", error})
