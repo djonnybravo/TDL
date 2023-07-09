@@ -6,6 +6,7 @@ import {
 import {Dispatch} from "redux";
 import {TaskPriorities, TaskStatuses, TaskType, todolistsAPI, UpdateTaskModelType} from "../../../api/todolists-api";
 import {AppRootStateType} from "../../../App/store";
+import {setErrorAC} from "../../../App/app-reducer";
 
 // types
 export type UpdateDomainTaskModelType = {
@@ -111,9 +112,15 @@ export const removeTaskTC = (todolistID: string, taskID: string) => {
 export const createTaskTC = (todolistID: string, title: string) => {
 
     return (dispatch: Dispatch) => {
-        todolistsAPI.createTask(todolistID, title).then((res) => {
-                dispatch(addTaskAC(res.data.data.item))
+        todolistsAPI.createTask(todolistID, title)
+            .then((res) => {
+                if (res.data.resultCode === 0) {
+                    dispatch(addTaskAC(res.data.data.item))
+                }else {
+                    dispatch(setErrorAC(res.data.messages[0]))
+                }
             }
+
         )
     }
 }
