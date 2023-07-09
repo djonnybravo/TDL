@@ -31,4 +31,3 @@ type initialStateType = {
 }
 
 type ActionsTypes = any
-}
