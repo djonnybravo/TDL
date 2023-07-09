@@ -23,14 +23,12 @@ const initialState: initialStateType = {
     status: "idle",
     error: "ERER"
 }
-
 type initialStateType = {
-
-    status: statusType
+    status: RequestStatusType
     error: string | null
 }
-type statusType = 'idle' | 'loading' | 'success' | 'failed'
-type ActionsTypes = any
+type RequestStatusType = 'idle' | 'loading' | 'success' | 'failed'
+type ActionsTypes = ReturnType<typeof setErrorAC> | ReturnType<typeof setStatusAC>
 
-export const SetStatusAC = (status: statusType) => ({type: "APP/SET-STATUS", status})
-export const SetErrorAC = (error: string | null) => ({type: "APP/SET-ERROR", error})
+export const setStatusAC = (status: RequestStatusType) => ({type: "APP/SET-STATUS", status} as const)
+export const setErrorAC = (error: string | null) => ({type: "APP/SET-ERROR", error} as const)
