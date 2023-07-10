@@ -56,7 +56,7 @@ export const tasksReducer = (state: TasksStateType = initState, action: ActionsT
 
 
 //ACTIONS
-export const removeTaskAC = (taskID: string, todolistID: string) =>
+export const removeTaskAC = (todolistID: string, taskID: string) =>
     ({type: 'REMOVE-TASK', taskID, todolistID} as const)
 export const addTaskAC = (task: TaskType) =>
     ({type: 'ADD-TASK', task} as const)
@@ -74,7 +74,7 @@ export const fetchTasksTC = (todolistID: string) => {
         todolistsAPI.getTasks(todolistID)
             .then((res) => {
                 dispatch(setTasksAC(todolistID, res.data.items))
-                dispatch(setStatusAC('idle'))
+                dispatch(setStatusAC('success'))
 
             })
     }
@@ -99,6 +99,7 @@ export const createTaskTC = (todolistID: string, title: string) => {
             .then((res) => {
                 if (res.data.resultCode === 0) {
                     dispatch(addTaskAC(res.data.data.item))
+                    dispatch(setStatusAC('success'))
                 }else {
                     dispatch(setErrorAC(res.data.messages[0]))
                     dispatch(setStatusAC('failed'))
