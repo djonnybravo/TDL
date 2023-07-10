@@ -84,7 +84,7 @@ export const removeTaskTC = (todolistID: string, taskID: string) => {
 
     return (dispatch: ThunkDispatch) => {
         todolistsAPI.deleteTask(todolistID, taskID)
-            .then( () => {
+            .then( (res) => {
             dispatch(removeTaskAC(todolistID, taskID))
             }
         )
