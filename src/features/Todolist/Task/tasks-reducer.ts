@@ -8,31 +8,6 @@ import {TaskPriorities, TaskStatuses, TaskType, todolistsAPI, UpdateTaskModelTyp
 import {AppRootStateType} from "../../../App/store";
 import {AppActionsTypes, setErrorAC, setStatusAC} from "../../../App/app-reducer";
 
-// types
-export type UpdateDomainTaskModelType = {
-    title?: string
-    description?: string
-    status?: TaskStatuses
-    priority?: TaskPriorities
-    startDate?: string
-    deadline?: string
-}
-export type TasksStateType = {
-    [key: string]: Array<TaskType>
-}
-type ActionsType =
-    | ReturnType<typeof removeTaskAC>
-    | ReturnType<typeof addTaskAC>
-    | ReturnType<typeof updateTaskAC>
-    | AddTodolistActionType
-    | RemoveTodolistActionType
-    | SetTodolistsActionType
-    | ReturnType<typeof setTasksAC>
-
-type ThunkDispatch = Dispatch<ActionsType | AppActionsTypes>
-
-
-const initState: TasksStateType = {}
 
 export const tasksReducer = (state: TasksStateType = initState, action: ActionsType): TasksStateType => {
     switch (action.type){
@@ -108,7 +83,8 @@ export const fetchTasksTC = (todolistID: string) => {
 export const removeTaskTC = (todolistID: string, taskID: string) => {
 
     return (dispatch: ThunkDispatch) => {
-        todolistsAPI.deleteTask(todolistID, taskID).then( () => {
+        todolistsAPI.deleteTask(todolistID, taskID)
+            .then( () => {
             dispatch(removeTaskAC(todolistID, taskID))
             }
         )
@@ -135,12 +111,17 @@ export const createTaskTC = (todolistID: string, title: string) => {
 }
 
 export const updateTaskTC = (taskID: string, domainModel: UpdateDomainTaskModelType, todolistID: string) =>
+
     (dispatch: ThunkDispatch, getState: () => AppRootStateType) => {
+
+        dispatch(setStatusAC('loading'))
         const state = getState()
         const task = state.tasks[todolistID].find(t => t.id === taskID)
         if (!task) {
             //throw new Error("task not found in the state");
             console.warn('task not found in the state')
+            dispatch(setErrorAC('task not found in the state'))
+            dispatch(setStatusAC('failed'))
             return
         }
 
@@ -158,5 +139,31 @@ export const updateTaskTC = (taskID: string, domainModel: UpdateDomainTaskModelT
             .then(res => {
                 const action = updateTaskAC(taskID, domainModel, todolistID)
                 dispatch(action)
+                dispatch(setStatusAC('success'))
             })
     }
+
+
+
+// types
+export type UpdateDomainTaskModelType = {
+    title?: string
+    description?: string
+    status?: TaskStatuses
+    priority?: TaskPriorities
+    startDate?: string
+    deadline?: string
+}
+export type TasksStateType = {
+    [key: string]: Array<TaskType>
+}
+type ActionsType =
+    | ReturnType<typeof removeTaskAC>
+    | ReturnType<typeof addTaskAC>
+    | ReturnType<typeof updateTaskAC>
+    | AddTodolistActionType
+    | RemoveTodolistActionType
+    | SetTodolistsActionType
+    | ReturnType<typeof setTasksAC>
+type ThunkDispatch = Dispatch<ActionsType | AppActionsTypes>
+const initState: TasksStateType = {}
