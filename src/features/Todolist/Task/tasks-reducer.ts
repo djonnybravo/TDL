@@ -116,12 +116,15 @@ export const removeTaskTC = (todolistID: string, taskID: string) => {
 export const createTaskTC = (todolistID: string, title: string) => {
 
     return (dispatch: Dispatch) => {
+        dispatch(setStatusAC('loading'))
         todolistsAPI.createTask(todolistID, title)
             .then((res) => {
                 if (res.data.resultCode === 0) {
                     dispatch(addTaskAC(res.data.data.item))
                 }else {
                     dispatch(setErrorAC(res.data.messages[0]))
+                    dispatch(setStatusAC('failed'))
+
                 }
             }
 
