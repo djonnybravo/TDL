@@ -21,8 +21,7 @@ export function SnackbarMUI(props: SnackbarMUIPropsType) {
 
     const error = useSelector<AppRootStateType, string | null>(state => state.app.error)
     const dispatch = useAppDispatch()
-    const vertical = 'bottom'
-    const horizontal = 'center'
+
 
     const isOpen = error !== null
     const handleClose = () => {
@@ -32,7 +31,7 @@ export function SnackbarMUI(props: SnackbarMUIPropsType) {
 
     return (
 
-        <Snackbar open={isOpen} autoHideDuration={6000} onClose={handleClose} anchorOrigin={{vertical, horizontal}} >
+        <Snackbar open={isOpen} autoHideDuration={6000} onClose={handleClose} anchorOrigin={{vertical: "bottom", horizontal: "center"}} >
             <Alert onClose={handleClose} severity={props.alertType} sx={{ width: '100%' }}>
                 {error}
             </Alert>
