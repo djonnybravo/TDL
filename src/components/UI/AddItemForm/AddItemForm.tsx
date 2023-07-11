@@ -4,6 +4,7 @@ import {ControlPoint} from "@mui/icons-material";
 
 export type AddItemFormPropsType = {
     addItem: (title: string) => void
+    disabled?: boolean
 }
 
 const AddItemForm = React.memo((props: AddItemFormPropsType) => {
@@ -43,21 +44,12 @@ const AddItemForm = React.memo((props: AddItemFormPropsType) => {
                 value={title}
                 onChange={onChangeInputHandler}
                 onKeyPress={onKeyPressInputHandler}
-
+                disabled={props.disabled}
             />
-            <IconButton onClick={addItem}>
-                <ControlPoint color={ error ? "error" : "primary"}/>
+            <IconButton onClick={addItem} disabled={props.disabled} color={props.disabled || error ? 'error' : "primary"}>
+                <ControlPoint />
             </IconButton>
 
-
-            {/*<input*/}
-            {/*    value={newTaskTitle}*/}
-            {/*    onChange={onChangeInputHandler}*/}
-            {/*    onKeyPress={onKeyPressInputHandler}*/}
-            {/*    className={error ? "error" : ""}*/}
-            {/*/>*/}
-            {/*<Button onClick={addItem}>+</Button>*/}
-            {/*{error && <div className="error-message">Field is required and cant be empty!</div>}*/}
 
         </div>
     );
