@@ -33,6 +33,8 @@ export const todolistsReducer = (state: Array<TodolistDomainType> = [], action: 
         case 'CHANGE-TODOLIST-FILTER':
 
             return state.map(tl => tl.id === action.todolistId ? {...tl, filter: action.filter} : tl)
+        case 'SET-ENTITY-STATUS':
+            return state.map(tl => tl.id === action.todolistID ? {...tl, entityStatus: action.status} : tl)
 
         default:
 
@@ -54,7 +56,7 @@ export const ChangeTodolistFilterAC = (todolistId: string, filter: FilterValuesT
     filter
 } as const)
 export const setTodolistsAC = (todolists: Array<TodolistType>) => ({type: 'SET-TODOLISTS', todolists} as const)
-
+export const setEntityStatusAC = (todolistID: string, status: RequestStatusType) => ({type: 'SET-ENTITY-STATUS', todolistID, status} as const)
 
 //THUNK CREATORS
 export const fetchTodolistsTC = () => {
@@ -90,7 +92,7 @@ export const createTodolistTC = (title: string) => {
 export const removeTodolistTC = (todolistID: string) => {
     return (dispatch:ThunkDispatch) => {
         dispatch(setStatusAC('loading'))
-
+        dispatch(setEntityStatusAC(todolistID, 'loading'))
         todolistsAPI.deleteTodolist(todolistID)
             .then((res) => {
                 dispatch(RemoveTodolistAC(todolistID))
@@ -107,11 +109,13 @@ export const removeTodolistTC = (todolistID: string) => {
 export const changeTodolistTitleTC = (todolistID: string, title: string) => {
     return (dispatch: ThunkDispatch) => {
         dispatch(setStatusAC('loading'))
+        dispatch(setEntityStatusAC(todolistID, 'loading'))
 
         todolistsAPI.updateTodolist(todolistID, title)
             .then((res) => {
                 dispatch(ChangeTodolistTitleAC(todolistID, title))
                 dispatch(setStatusAC('success'))
+                dispatch(setEntityStatusAC(todolistID, 'idle'))
 
             })
             .catch((e) => {
@@ -130,6 +134,7 @@ type ActionsType =
     | ReturnType<typeof AddTodolistAC>
     | ReturnType<typeof ChangeTodolistTitleAC>
     | ReturnType<typeof ChangeTodolistFilterAC>
+    | ReturnType<typeof setEntityStatusAC>
     | SetStatusType
     | SetErrorType
 export type FilterValuesType = 'All' | 'Completed' | 'Active'
