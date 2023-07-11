@@ -1,11 +1,12 @@
 import React, {memo, useCallback, useEffect} from 'react';
-
 import AddItemForm from "../../components/UI/AddItemForm/AddItemForm";
 import EditableSpan from '../../components/UI/EditableSpan/EditableSpan';
-import {Button, IconButton, Paper} from "@mui/material";
+import Button from "@mui/material/Button";
+import IconButton from "@mui/material/IconButton";
+import Paper from "@mui/material/Paper";
 import {DeleteOutline} from "@mui/icons-material";
 import Task from "./Task/Task";
-import {fetchTodolistsTC, FilterValuesType} from "./todolists-reducer";
+import {FilterValuesType} from "./todolists-reducer";
 import {TaskStatuses, TaskType} from "../../api/todolists-api";
 import {useAppDispatch} from "../../App/store";
 import {fetchTasksTC} from "./Task/tasks-reducer";
