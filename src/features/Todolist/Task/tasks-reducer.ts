@@ -76,6 +76,11 @@ export const fetchTasksTC = (todolistID: string) => {
                 dispatch(setStatusAC('success'))
 
             })
+            .catch((e) => {
+            dispatch(setStatusAC('failed'))
+            dispatch(setErrorAC(e.message))
+
+        })
     }
 }
 
@@ -91,6 +96,11 @@ export const removeTaskTC = (todolistID: string, taskID: string) => {
 
                 }
             )
+            .catch((e) => {
+                dispatch(setStatusAC('failed'))
+                dispatch(setErrorAC(e.message))
+
+            })
     }
 }
 
@@ -110,6 +120,11 @@ export const createTaskTC = (todolistID: string, title: string) => {
                     }
                 }
             )
+            .catch((e) => {
+                dispatch(setStatusAC('failed'))
+                dispatch(setErrorAC(e.message))
+
+            })
     }
 }
 
@@ -155,6 +170,8 @@ export const updateTaskTC = (taskID: string, domainModel: UpdateDomainTaskModelT
 
             })
             .catch((e) => {
+                dispatch(setStatusAC('failed'))
+                dispatch(setErrorAC(e.message))
 
             })
     }
