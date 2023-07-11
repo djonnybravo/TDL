@@ -70,6 +70,7 @@ const TodolistList = () => {
 
                                 <Todolist
                                     todolistID={tl.id}
+                                    entityStatus={tl.entityStatus}
                                     title={tl.title}
                                     tasks={tasksObj[tl.id]}
                                     removeTask={removeTask}
