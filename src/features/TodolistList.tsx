@@ -11,10 +11,11 @@ import {
 import {useSelector} from "react-redux";
 import {createTaskTC, removeTaskTC, TasksStateType, updateTaskTC} from "./Todolist/Task/tasks-reducer";
 import {TaskStatuses} from "../api/todolists-api";
-import {Container, Grid, Paper} from "@mui/material";
 import AddItemForm from "../components/UI/AddItemForm/AddItemForm";
 import Todolist from "./Todolist/Todolist";
-
+import Container from "@mui/material/Container";
+import Grid from "@mui/material/Grid";
+import Paper from "@mui/material/Paper";
 const TodolistList = () => {
 
     const dispatch = useAppDispatch()
