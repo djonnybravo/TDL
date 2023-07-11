@@ -140,9 +140,22 @@ export const updateTaskTC = (taskID: string, domainModel: UpdateDomainTaskModelT
 
         todolistsAPI.updateTask(todolistID, taskID, apiModel)
             .then(res => {
-                const action = updateTaskAC(taskID, domainModel, todolistID)
-                dispatch(action)
-                dispatch(setStatusAC('success'))
+                if (res.data.resultCode === 0) {
+                    const action = updateTaskAC(taskID, domainModel, todolistID)
+                    dispatch(action)
+                    dispatch(setStatusAC('success'))
+                } else {
+                    if (res.data.messages[0]){
+                        dispatch(setErrorAC(res.data.messages[0]))
+                    }else{
+                        dispatch(setErrorAC("Произошла ошибка, попробуй еще раз."))
+                    }
+                    dispatch(setStatusAC('failed'))
+                }
+
+            })
+            .catch((e) => {
+
             })
     }
 
