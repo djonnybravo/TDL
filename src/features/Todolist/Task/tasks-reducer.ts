@@ -6,6 +6,7 @@ import {Dispatch} from "redux";
 import {TaskPriorities, TaskStatuses, TaskType, todolistsAPI, UpdateTaskModelType} from "../../../api/todolists-api";
 import {AppRootStateType} from "../../../App/store";
 import {AppActionsTypes, setAppErrorAC, setAppStatusAC} from "../../../App/app-reducer";
+import {handleServerAppError, handleServerNetworkError} from "../../../utils/error-utils";
 
 
 export const tasksReducer = (state: TasksStateType = initState, action: ActionsType): TasksStateType => {
@@ -77,9 +78,7 @@ export const fetchTasksTC = (todolistID: string) => {
 
             })
             .catch((e) => {
-            dispatch(setAppStatusAC('failed'))
-            dispatch(setAppErrorAC(e.message))
-
+                handleServerNetworkError(e.message, dispatch)
         })
     }
 }
@@ -97,8 +96,7 @@ export const removeTaskTC = (todolistID: string, taskID: string) => {
                 }
             )
             .catch((e) => {
-                dispatch(setAppStatusAC('failed'))
-                dispatch(setAppErrorAC(e.message))
+                handleServerNetworkError(e.message, dispatch)
 
             })
     }
@@ -116,13 +114,12 @@ export const createTaskTC = (todolistID: string, title: string) => {
                     } else {
                         dispatch(setAppErrorAC(res.data.messages[0]))
                         dispatch(setAppStatusAC('failed'))
-
+                        handleServerAppError(res.data, dispatch)
                     }
                 }
             )
             .catch((e) => {
-                dispatch(setAppStatusAC('failed'))
-                dispatch(setAppErrorAC(e.message))
+                handleServerNetworkError(e.message, dispatch)
 
             })
     }
@@ -170,9 +167,7 @@ export const updateTaskTC = (taskID: string, domainModel: UpdateDomainTaskModelT
 
             })
             .catch((e) => {
-                dispatch(setAppStatusAC('failed'))
-                dispatch(setAppErrorAC(e.message))
-
+                handleServerNetworkError(e.message, dispatch)
             })
     }
 
