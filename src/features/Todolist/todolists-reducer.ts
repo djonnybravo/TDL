@@ -8,6 +8,7 @@ import {
     setAppStatusAC,
     SetAppStatusActionType
 } from "../../App/app-reducer";
+import {handleServerNetworkError} from "../../utils/error-utils";
 
 
 export const todolistsReducer = (state: Array<TodolistDomainType> = [], action: ActionsType): Array<TodolistDomainType> => {
@@ -68,8 +69,7 @@ export const fetchTodolistsTC = () => {
                 dispatch(setAppStatusAC('success'))
             })
             .catch((e) => {
-                dispatch(setAppStatusAC('failed'))
-                dispatch(setAppErrorAC(e.message))
+                handleServerNetworkError(e.message, dispatch)
 
             })
     }
@@ -83,8 +83,7 @@ export const createTodolistTC = (title: string) => {
                 dispatch(setAppStatusAC('success'))
             })
             .catch((e) => {
-                dispatch(setAppStatusAC('failed'))
-                dispatch(setAppErrorAC(e.message))
+                handleServerNetworkError(e.message, dispatch)
 
             })
     }
@@ -100,8 +99,7 @@ export const removeTodolistTC = (todolistID: string) => {
 
             })
             .catch((e) => {
-                dispatch(setAppStatusAC('failed'))
-                dispatch(setAppErrorAC(e.message))
+                handleServerNetworkError(e.message, dispatch)
 
             })
     }
@@ -119,8 +117,7 @@ export const changeTodolistTitleTC = (todolistID: string, title: string) => {
 
             })
             .catch((e) => {
-                dispatch(setAppStatusAC('failed'))
-                dispatch(setAppErrorAC(e.message))
+                handleServerNetworkError(e.message, dispatch)
 
             })
     }
