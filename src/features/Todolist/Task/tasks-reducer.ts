@@ -5,7 +5,7 @@ import {
 import {Dispatch} from "redux";
 import {TaskPriorities, TaskStatuses, TaskType, todolistsAPI, UpdateTaskModelType} from "../../../api/todolists-api";
 import {AppRootStateType} from "../../../App/store";
-import {AppActionsTypes, setErrorAC, setStatusAC} from "../../../App/app-reducer";
+import {AppActionsTypes, setAppErrorAC, setAppStatusAC} from "../../../App/app-reducer";
 
 
 export const tasksReducer = (state: TasksStateType = initState, action: ActionsType): TasksStateType => {
@@ -69,16 +69,16 @@ export const setTasksAC = (todolistID: string, tasks: Array<TaskType>,) =>
 export const fetchTasksTC = (todolistID: string) => {
 
     return (dispatch: ThunkDispatch) => {
-        dispatch(setStatusAC('loading'))
+        dispatch(setAppStatusAC('loading'))
         todolistsAPI.getTasks(todolistID)
             .then((res) => {
                 dispatch(setTasksAC(todolistID, res.data.items))
-                dispatch(setStatusAC('success'))
+                dispatch(setAppStatusAC('success'))
 
             })
             .catch((e) => {
-            dispatch(setStatusAC('failed'))
-            dispatch(setErrorAC(e.message))
+            dispatch(setAppStatusAC('failed'))
+            dispatch(setAppErrorAC(e.message))
 
         })
     }
@@ -87,18 +87,18 @@ export const fetchTasksTC = (todolistID: string) => {
 export const removeTaskTC = (todolistID: string, taskID: string) => {
 
     return (dispatch: ThunkDispatch) => {
-        dispatch(setStatusAC('loading'))
+        dispatch(setAppStatusAC('loading'))
 
         todolistsAPI.deleteTask(todolistID, taskID)
             .then((res) => {
                     dispatch(removeTaskAC(todolistID, taskID))
-                    dispatch(setStatusAC('success'))
+                    dispatch(setAppStatusAC('success'))
 
                 }
             )
             .catch((e) => {
-                dispatch(setStatusAC('failed'))
-                dispatch(setErrorAC(e.message))
+                dispatch(setAppStatusAC('failed'))
+                dispatch(setAppErrorAC(e.message))
 
             })
     }
@@ -107,22 +107,22 @@ export const removeTaskTC = (todolistID: string, taskID: string) => {
 export const createTaskTC = (todolistID: string, title: string) => {
 
     return (dispatch: ThunkDispatch) => {
-        dispatch(setStatusAC('loading'))
+        dispatch(setAppStatusAC('loading'))
         todolistsAPI.createTask(todolistID, title)
             .then((res) => {
                     if (res.data.resultCode === 0) {
                         dispatch(addTaskAC(res.data.data.item))
-                        dispatch(setStatusAC('success'))
+                        dispatch(setAppStatusAC('success'))
                     } else {
-                        dispatch(setErrorAC(res.data.messages[0]))
-                        dispatch(setStatusAC('failed'))
+                        dispatch(setAppErrorAC(res.data.messages[0]))
+                        dispatch(setAppStatusAC('failed'))
 
                     }
                 }
             )
             .catch((e) => {
-                dispatch(setStatusAC('failed'))
-                dispatch(setErrorAC(e.message))
+                dispatch(setAppStatusAC('failed'))
+                dispatch(setAppErrorAC(e.message))
 
             })
     }
@@ -132,14 +132,14 @@ export const updateTaskTC = (taskID: string, domainModel: UpdateDomainTaskModelT
 
     (dispatch: ThunkDispatch, getState: () => AppRootStateType) => {
 
-        dispatch(setStatusAC('loading'))
+        dispatch(setAppStatusAC('loading'))
         const state = getState()
         const task = state.tasks[todolistID].find(t => t.id === taskID)
         if (!task) {
             //throw new Error("task not found in the state");
             console.warn('task not found in the state')
-            dispatch(setErrorAC('task not found in the state'))
-            dispatch(setStatusAC('failed'))
+            dispatch(setAppErrorAC('task not found in the state'))
+            dispatch(setAppStatusAC('failed'))
             return
         }
 
@@ -158,20 +158,20 @@ export const updateTaskTC = (taskID: string, domainModel: UpdateDomainTaskModelT
                 if (res.data.resultCode === 0) {
                     const action = updateTaskAC(taskID, domainModel, todolistID)
                     dispatch(action)
-                    dispatch(setStatusAC('success'))
+                    dispatch(setAppStatusAC('success'))
                 } else {
                     if (res.data.messages[0]){
-                        dispatch(setErrorAC(res.data.messages[0]))
+                        dispatch(setAppErrorAC(res.data.messages[0]))
                     }else{
-                        dispatch(setErrorAC("Произошла ошибка, попробуй еще раз."))
+                        dispatch(setAppErrorAC("Произошла ошибка, попробуй еще раз."))
                     }
-                    dispatch(setStatusAC('failed'))
+                    dispatch(setAppStatusAC('failed'))
                 }
 
             })
             .catch((e) => {
-                dispatch(setStatusAC('failed'))
-                dispatch(setErrorAC(e.message))
+                dispatch(setAppStatusAC('failed'))
+                dispatch(setAppErrorAC(e.message))
 
             })
     }
