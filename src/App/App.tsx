@@ -21,6 +21,7 @@ function App() {
             <Routes>
                 <Route  path={'/'} element={<TodolistList/>}/>
                 <Route  path={'/login'} element={<Login/>}/>
+                <Route  path={"*"} element={<h1>404: PAGE NOT FOUND</h1>}/>
             </Routes>
 
             <SnackbarMUI alertType={"error"}/>
