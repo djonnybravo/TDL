@@ -15,7 +15,7 @@ export const Login = () => {
         initialValues: {
             email: '',
             password: "",
-            rememberMe: ''
+            rememberMe: false
         },
         onSubmit: values => {
             alert(JSON.stringify(values, null, 2))
