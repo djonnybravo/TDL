@@ -3,6 +3,8 @@ import './App.css';
 import TodolistList from "../features/TodolistList";
 import AppHeader from "../features/AppBar/AppHeader";
 import {SnackbarMUI} from "../components/UI/Snackbar/SnackbarMUI";
+import {Route, Routes} from "react-router-dom";
+import {Login} from "../features/Login/Login";
 
 
 
@@ -16,8 +18,12 @@ function App() {
     return (
         <div className="App">
             <AppHeader/>
-            <TodolistList/>
-            <SnackbarMUI alertType={"error"}  />
+            <Routes>
+                <Route  path={'/'} element={<TodolistList/>}/>
+                <Route  path={'/login'} element={<Login/>}/>
+            </Routes>
+
+            <SnackbarMUI alertType={"error"}/>
         </div>
     );
 
