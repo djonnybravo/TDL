@@ -7,8 +7,22 @@ import FormGroup from '@mui/material/FormGroup';
 import FormLabel from '@mui/material/FormLabel';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import {useFormik} from "formik";
 
 export const Login = () => {
+
+    const formik = useFormik({
+        initialValues: {
+            email: '',
+            password: "",
+            rememberMe: ''
+        },
+        onSubmit: values => {
+            alert(JSON.stringify(values, null, 2))
+        }
+    })
+
+
     return <Grid container justifyContent={'center'}>
         <Grid item justifyContent={'center'}>
             <FormControl>
@@ -23,9 +37,11 @@ export const Login = () => {
                     <p>Password: free</p>
                 </FormLabel>
                 <FormGroup>
-                    <TextField label="Email" margin="normal"/>
+                    <TextField label="Email" margin="normal" onChange={formik.handleChange} value={formik.initialValues.email}/>
                     <TextField type="password" label="Password"
                                margin="normal"
+                               onChange={formik.handleChange}
+                               value={formik.initialValues.password}
                     />
                     <FormControlLabel label={'Remember me'} control={<Checkbox/>}/>
                     <Button type={'submit'} variant={'contained'} color={'primary'}>
