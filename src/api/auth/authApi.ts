@@ -12,6 +12,6 @@ const instance = axios.create({
 
 export const authAPI = {
     login(data: LoginType) {
-        return instance.post('auth/login', {data})
+        return instance.post('auth/login', data)
     }
 }
