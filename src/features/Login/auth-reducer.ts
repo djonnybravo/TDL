@@ -1,5 +1,6 @@
 import { Dispatch } from 'redux'
 import {SetAppErrorActionType, setAppStatusAC, SetAppStatusActionType} from "../../App/app-reducer";
+import {LoginType} from "./Login";
 
 
 const initialState = {
@@ -20,7 +21,7 @@ export const setIsLoggedInAC = (value: boolean) =>
     ({type: 'login/SET-IS-LOGGED-IN', value} as const)
 
 // thunks
-export const loginTC = (data: any) => (dispatch: Dispatch<ActionsType>) => {
+export const loginTC = (data: LoginType) => (dispatch: Dispatch<ActionsType>) => {
     dispatch(setAppStatusAC('loading'))
 }
 
