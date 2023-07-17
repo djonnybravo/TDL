@@ -16,7 +16,11 @@ import Todolist from "./Todolist/Todolist";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
+import {Navigate} from "react-router-dom";
 const TodolistList = () => {
+
+    const isLoggedIn = useSelector<AppRootStateType>(state => state.auth.isLoggedIn)
+
 
     const dispatch = useAppDispatch()
 
@@ -50,6 +54,10 @@ const TodolistList = () => {
     const changeFilter = useCallback((value: FilterValuesType, todolistID: string) => {
         dispatch(ChangeTodolistFilterAC(todolistID, value))
     }, [dispatch])
+
+    if (!isLoggedIn) {
+        return <Navigate to="/login"/>
+    }
 
     return (
         <>
