@@ -11,9 +11,6 @@ const instance = axios.create({
 
 
 export const authAPI = {
-    isLogged(id: number, email: string, login: string) {
-        return instance.get('auth/me')
-    },
     login(data: LoginType) {
         return instance.post('auth/login', {data})
     }

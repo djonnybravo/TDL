@@ -1,4 +1,4 @@
-import { Dispatch } from 'redux'
+import {Dispatch} from 'redux'
 import {SetAppErrorActionType, setAppStatusAC, SetAppStatusActionType} from "../../App/app-reducer";
 import {LoginType} from "./Login";
 import {authAPI} from "../../api/auth/authApi";
@@ -23,23 +23,48 @@ export const setIsLoggedInAC = (value: boolean) =>
     ({type: 'login/SET-IS-LOGGED-IN', value} as const)
 
 // thunks
-export const loginTC = (data: LoginType) => async (dispatch: Dispatch<ActionsType>) => {
+// export const loginTC = (data: LoginType) => async (dispatch: Dispatch<ActionsType>) => {
+//
+//     try {
+//         dispatch(setAppStatusAC('loading'))
+//         const res = await authAPI.login(data)
+//         if (res.data.resultCode === 0) {
+//             dispatch(setIsLoggedInAC(true))
+//             dispatch(setAppStatusAC('success'))
+//
+//         } else {
+//             handleServerAppError(res.data, dispatch)
+//         }
+//     }
+//     catch (e) {
+//         const error = e as {message: string}
+//         handleServerNetworkError(error, dispatch)
+//     }
+//
+// }
 
-    try {
-        dispatch(setAppStatusAC('loading'))
-        const res = await authAPI.login(data)
-        if (res.data.resultCode === 0) {
-            dispatch(setIsLoggedInAC(true))
-        } else {
-            handleServerAppError(res.data, dispatch)
-        }
-    }
-    catch (e) {
-        const error = e as {message: string}
+export const loginTC = (data: LoginType) => (dispatch: Dispatch<ActionsType>) => {
+
+
+    dispatch(setAppStatusAC('loading'))
+    authAPI.login(data)
+        .then(res => {
+            if (res.data.resultCode === 0) {
+                dispatch(setIsLoggedInAC(true))
+                dispatch(setAppStatusAC('success'))
+
+            } else {
+                handleServerAppError(res.data, dispatch)
+            }
+        })
+        .catch(e => {
+        const error = e as { message: string }
         handleServerNetworkError(error, dispatch)
-    }
+         })
+
 
 }
+
 
 // types
 type ActionsType = ReturnType<typeof setIsLoggedInAC> | SetAppStatusActionType | SetAppErrorActionType
