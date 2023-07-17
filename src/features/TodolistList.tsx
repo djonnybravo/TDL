@@ -25,6 +25,9 @@ const TodolistList = () => {
     const dispatch = useAppDispatch()
 
     useEffect( () => {
+        if (!isLoggedIn){
+            return
+        }
         dispatch(fetchTodolistsTC())
     }, [])
 
