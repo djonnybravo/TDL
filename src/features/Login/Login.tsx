@@ -29,9 +29,7 @@ export const Login = () => {
     const dispatch = useAppDispatch()
     const isLoggedIn = useSelector<AppRootStateType>(state => state.auth.isLoggedIn)
 
-    if (isLoggedIn) {
-        return <Navigate to="/"/>
-    }
+
 
     const formik = useFormik({
         initialValues: {
@@ -59,6 +57,11 @@ export const Login = () => {
         }
     })
 
+
+
+    if (isLoggedIn) {
+        return <Navigate to="/"/>
+    }
 
     return <Grid container justifyContent={'center'}>
         <Grid item justifyContent={'center'}>
