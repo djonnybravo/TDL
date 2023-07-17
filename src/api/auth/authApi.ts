@@ -1,4 +1,5 @@
 import axios from 'axios'
+import {LoginType} from "../../features/Login/Login";
 
 const instance = axios.create({
     baseURL: 'https://social-network.samuraijs.com/api/1.1/',
@@ -13,7 +14,7 @@ export const authAPI = {
     isLogged(id: number, email: string, login: string) {
         return instance.get('auth/me')
     },
-    login(email: string, password: string, rememberMe: boolean) {
-        return instance.post('auth/login', {email, password, rememberMe})
+    login(data: LoginType) {
+        return instance.post('auth/login', {data})
     }
 }
