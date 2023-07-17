@@ -25,6 +25,9 @@ export const setIsLoggedInAC = (value: boolean) =>
 export const loginTC = (data: LoginType) => (dispatch: Dispatch<ActionsType>) => {
     dispatch(setAppStatusAC('loading'))
     authAPI.login(data)
+        .then((res) => {
+            dispatch(setIsLoggedInAC(true))
+        })
 }
 
 // types
