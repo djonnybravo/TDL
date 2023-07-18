@@ -59,7 +59,7 @@ const TodolistList = () => {
     }, [dispatch])
 
     if (!isLoggedIn) {
-        return <Navigate to="/login"/>
+        return <Navigate to="/logIn"/>
     }
 
     return (
