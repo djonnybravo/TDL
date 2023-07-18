@@ -5,8 +5,10 @@ import AppHeader from "../features/AppBar/AppHeader";
 import {SnackbarMUI} from "../components/UI/Snackbar/SnackbarMUI";
 import {Navigate, Route, Routes} from "react-router-dom";
 import {Login} from "../features/Login/Login";
-import {useAppDispatch} from "./store";
+import {AppRootStateType, useAppDispatch} from "./store";
 import {initializeAppTC} from "../features/Login/auth-reducer";
+import {CircularProgress} from "@mui/material";
+import {useSelector} from "react-redux";
 
 
 
@@ -16,10 +18,23 @@ import {initializeAppTC} from "../features/Login/auth-reducer";
 function App() {
 
     const dispatch = useAppDispatch()
+    const isInitialized = useSelector<AppRootStateType>(state => state.app.isInitialized)
 
     useEffect( () => {
         dispatch(initializeAppTC())
     }, [])
+
+
+
+
+    if (!isInitialized) {
+        return <div
+            style={{position: 'fixed', top: '30%', textAlign: 'center', width: '100%'}}>
+            <CircularProgress/>
+        </div>
+    }
+
+
 
     return (
         <div className="App">
