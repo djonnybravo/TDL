@@ -11,7 +11,7 @@ import IconButton from "@mui/material/IconButton";
 import LinearProgress from "@mui/material/LinearProgress";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import {logoutTC} from "../Login/auth-reducer";
+import {logOutTC} from "../Login/auth-reducer";
 
 
 
@@ -24,7 +24,7 @@ const AppHeader = () => {
     const dispatch = useAppDispatch()
 
     const logout = () => {
-        dispatch(logoutTC())
+        dispatch(logOutTC())
     }
 
 
