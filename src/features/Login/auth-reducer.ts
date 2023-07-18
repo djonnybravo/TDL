@@ -1,5 +1,5 @@
 import {Dispatch} from 'redux'
-import {SetAppErrorActionType, setAppStatusAC, SetAppStatusActionType} from "../../App/app-reducer";
+import {SetAppErrorActionType, setAppStatusAC, SetAppStatusActionType, setIsInitializedAC} from "../../App/app-reducer";
 import {LoginType} from "./Login";
 import {authAPI} from "../../api/auth/authApi";
 import {handleServerAppError, handleServerNetworkError} from "../../utils/error-utils";
@@ -73,14 +73,19 @@ export const initializeAppTC = () => (dispatch: Dispatch) => {
             if (res.data.resultCode === 0) {
                 dispatch(setIsLoggedInAC(true));
                 dispatch(setAppStatusAC('success'))
+                dispatch(setIsInitializedAC(true))
             } else {
                 handleServerAppError(res.data, dispatch)
+                dispatch(setIsInitializedAC(false))
+
 
             }
         })
         .catch(e => {
             const error = e as { message: string }
             handleServerNetworkError(error, dispatch)
+            dispatch(setIsInitializedAC(false))
+
         })
 }
 
