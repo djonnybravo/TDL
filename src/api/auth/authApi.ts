@@ -8,8 +8,11 @@ type UserData = {
 }
 
 export const authAPI = {
-    login(data: LoginType) {
+    logIn(data: LoginType) {
         return instance.post('auth/login', data)
+    },
+    logOut() {
+        return instance.delete<ResponseType>('auth/login')
     },
     me() {
         return instance.get<ResponseType<UserData>>('auth/me')
