@@ -1,13 +1,6 @@
-import axios from 'axios'
 import {LoginType} from "../../features/Login/Login";
+import {instance} from "../todolists-api";
 
-const instance = axios.create({
-    baseURL: 'https://social-network.samuraijs.com/api/1.1/',
-    withCredentials: true,
-    headers: {
-        "API-KEY": "d49d0d6f-9d1b-4840-b7a2-147b39bd1e13"
-    }
-})
 
 
 export const authAPI = {
