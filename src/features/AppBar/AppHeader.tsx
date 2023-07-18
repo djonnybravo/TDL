@@ -12,6 +12,7 @@ import LinearProgress from "@mui/material/LinearProgress";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import {logOutTC} from "../Login/auth-reducer";
+import {Navigate} from "react-router-dom";
 
 
 
@@ -23,7 +24,7 @@ const AppHeader = () => {
     const requestStatus = useSelector<AppRootStateType, RequestStatusType>(state => state.app.status)
     const dispatch = useAppDispatch()
 
-    const logout = () => {
+    const LoginButtonHandler = () => {
         dispatch(logOutTC())
     }
 
@@ -44,7 +45,8 @@ const AppHeader = () => {
                     <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
                         News
                     </Typography>
-                    { !isLoggedIn && <Button color="inherit" onClick={logout}>Log out</Button>}
+                   <Button color="inherit" onClick={LoginButtonHandler}>{isLoggedIn ? "Logout" : "Login"}</Button>
+
                 </Toolbar>
                 {
                     requestStatus === "loading" && <LinearProgress/>
