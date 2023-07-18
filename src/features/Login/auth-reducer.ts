@@ -58,22 +58,30 @@ export const loginTC = (data: LoginType) => (dispatch: Dispatch<ActionsType>) =>
             }
         })
         .catch(e => {
-        const error = e as { message: string }
-        handleServerNetworkError(error, dispatch)
-         })
+            const error = e as { message: string }
+            handleServerNetworkError(error, dispatch)
+        })
 
 
 }
 
 
 export const initializeAppTC = () => (dispatch: Dispatch) => {
-    authAPI.logme().then(res => {
-        debugger
-        if (res.data.resultCode === 0) {
-            dispatch(setIsLoggedInAC(true));
-        } else {
-        }
-    })
+    dispatch(setAppStatusAC('loading'))
+    authAPI.logme()
+        .then(res => {
+            if (res.data.resultCode === 0) {
+                dispatch(setIsLoggedInAC(true));
+                dispatch(setAppStatusAC('success'))
+            } else {
+                handleServerAppError(res.data, dispatch)
+
+            }
+        })
+        .catch(e => {
+            const error = e as { message: string }
+            handleServerNetworkError(error, dispatch)
+        })
 }
 
 // types
