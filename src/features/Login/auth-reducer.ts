@@ -68,7 +68,7 @@ export const loginTC = (data: LoginType) => (dispatch: Dispatch<ActionsType>) =>
 
 export const initializeAppTC = () => (dispatch: Dispatch) => {
     dispatch(setAppStatusAC('loading'))
-    authAPI.logme()
+    authAPI.me()
         .then(res => {
             if (res.data.resultCode === 0) {
                 dispatch(setIsLoggedInAC(true));
